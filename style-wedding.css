@@ -1704,66 +1704,6 @@ button:focus-visible {
 
 
 
-/* ══════════════════════════════════════════════════════════════════════════
-	 RESPONSIVE OVERRIDES
-══════════════════════════════════════════════════════════════════════════ */
-@media (max-width: 980px) {
-
-	.person-container,
-	.venue-grid,
-	.venue-schedule-grid {
-		grid-template-columns: 1fr;
-	}
-
-	.venue-schedule-grid {
-		gap: 2rem;
-	}
-
-}
-
-@media (max-width: 720px) {
-	.entry-logo-button {
-		width: min(88vw, 340px);
-	}
-
-	.hero {
-		padding-inline: 1rem;
-	}
-
-	.hero-content {
-		padding: 3rem 1rem 2.75rem;
-		border-radius: 22px;
-	}
-
-	.person-section,
-	.timeline-section,
-	.venue-section,
-	.gallery3d-section {
-		padding-inline: 1rem;
-	}
-
-	.person-card,
-	.venue-info-card,
-	.venue-schedule-card,
-	.venue-map-card {
-		padding: 1.2rem;
-		border-radius: 20px;
-	}
-
-	.person-details-grid {
-		grid-template-columns: 1fr;
-	}
-
-
-
-
-
-	.music-player-widget {
-		bottom: 1.2rem;
-		left: 1.2rem;
-	}
-}
-
 /* New Couple Photo Section Styles */
 .couple-photo-section {
 	padding: 5rem 1.5rem 6rem;
@@ -2203,36 +2143,6 @@ button:focus-visible {
 	font-size: 0.85rem;
 }
 
-@media (max-width: 640px) {
-	.flames-card {
-		padding: 2.1rem 1.25rem;
-		margin-bottom: 2.2rem;
-	}
-
-	.flames-letter {
-		width: 30px;
-		height: 30px;
-		font-size: 0.85rem;
-	}
-
-	.flames-word-letter {
-		width: 34px;
-		height: 42px;
-		font-size: 1.15rem;
-	}
-
-	.flames-row-label {
-		width: 100%;
-		min-width: auto;
-		text-align: center;
-	}
-
-	.flames-letters-row {
-		flex-direction: column;
-		gap: 0.5rem;
-	}
-}
-
 /* ══════════════════════════════════════════════════════════════════════════
    DESTINY BLAST — full-screen love-themed celebration fired when a FLAMES
    result (couple's "Reveal Destiny" or the personal calculator) is revealed
@@ -2321,18 +2231,24 @@ button:focus-visible {
 	}
 }
 
-/* ==========================================================================
-   Responsive Update
-   ========================================================================== */
+/* ══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE SYSTEM — single source of truth, mobile-first ordering.
+   Breakpoints run largest → smallest so the cascade always resolves the
+   way it reads on the page: each smaller block only overrides what needs
+   to change further, nothing fights an earlier rule.
+══════════════════════════════════════════════════════════════════════════ */
 
 /* Prevent horizontal scroll globally */
-html, body {
+html,
+body {
 	max-width: 100vw;
 	overflow-x: hidden;
 }
 
 /* Make all media assets responsive */
-img, video, iframe {
+img,
+video,
+iframe {
 	max-width: 100%;
 	height: auto;
 }
@@ -2347,33 +2263,44 @@ input[type="text"],
 	box-sizing: border-box;
 }
 
-/* ── Breakpoint 5: Laptop (1024px to 1439px) ── */
+/* Use dynamic viewport height where supported so mobile browser address
+   bars don't clip or misplace the hero / entry screen. Falls back to the
+   100vh already set earlier if unsupported. */
+@supports (height: 100dvh) {
+	.hero {
+		min-height: 100dvh;
+	}
+}
+
+/* ── Laptop / small desktop (≤1439px) ── */
 @media (max-width: 1439px) {
 	.venue-content {
 		width: min(1000px, 92%);
 		margin-inline: auto;
 	}
+
 	.venue-schedule-grid {
 		width: 100%;
 		gap: 2rem;
 	}
+
 	.venue-grid-split {
 		gap: 2rem;
 	}
 }
 
-/* ── Breakpoint 4: Tablet (768px to 1023px) ── */
-@media (max-width: 1023px) {
+/* ── Tablet (≤1024px) ── */
+@media (max-width: 1024px) {
 	.hero-content {
 		width: min(720px, 92%);
-		padding: 3.5rem 1.5rem 3.5rem;
+		padding: 3.5rem 1.5rem;
 	}
 
 	.venue-schedule-grid {
 		grid-template-columns: 1fr;
 		max-width: 580px;
 		margin-inline: auto;
-		gap: 1.75rem;
+		gap: 1.5rem;
 	}
 
 	.venue-grid-split {
@@ -2383,21 +2310,32 @@ input[type="text"],
 		gap: 2rem;
 	}
 
-	.venue-info-card, 
+	.venue-info-card,
 	.venue-map-card {
 		width: 100%;
 	}
+
+	.map-wrapper iframe {
+		min-height: 280px;
+	}
 }
 
-/* ── Breakpoint 3: Phablet & Landscape Mobile (481px to 767px) ── */
-@media (max-width: 767px) {
+/* ── Large phone / small tablet (≤768px) ── */
+@media (max-width: 768px) {
+
+	.hero,
+	.venue-section,
+	.gallery3d-section {
+		padding-inline: 1.25rem;
+	}
+
 	.hero {
-		padding: 5rem 1rem 4rem;
+		padding-block: 5rem 3.5rem;
 	}
 
 	.hero-content {
-		padding: 3rem 1.25rem 3rem;
-		border-radius: 12px;
+		padding: 3rem 1.5rem;
+		border-radius: 14px;
 	}
 
 	.hero-content::after {
@@ -2408,34 +2346,164 @@ input[type="text"],
 		font-size: clamp(2rem, 6.5vw, 2.8rem);
 	}
 
+	.venue-info-card,
+	.venue-schedule-card,
+	.venue-map-card {
+		padding: 1.5rem;
+	}
+
 	.flames-card {
 		padding: 2.2rem 1.5rem;
 	}
+
+	.couple-photo-section {
+		padding: 4rem 1.25rem 5rem;
+	}
+
+	.venue-closing {
+		padding: 2.5rem 1rem;
+	}
 }
 
-/* ── Breakpoint 2: Standard Mobile / iPhone Portrait (375px to 480px) ── */
-@media (max-width: 480px) {
-	.hero-names {
-		font-size: clamp(2rem, 9.5vw, 2.7rem);
+/* ── Standard mobile / iPhone portrait (≤600px) ──
+   This is where most of the real "structure" fixes live — everything
+   that was fighting for space at phone widths gets a single clean layout. */
+@media (max-width: 600px) {
+
+	/* Entry screen */
+	.entry-logo-button {
+		width: min(80vw, 320px);
+	}
+
+	/* Hero */
+	.hero {
+		padding: 4.5rem 1rem 3.5rem;
+	}
+
+	.hero-content {
+		width: 100%;
+		padding: 2.5rem 1.1rem 2.75rem;
+		border-radius: 12px;
+	}
+
+	.hero-monogram {
+		width: 60px;
+		height: 60px;
+		font-size: 1.25rem;
+		margin-bottom: 1.1rem;
 	}
 
 	.hero-pre {
 		font-size: 0.95rem;
-		letter-spacing: 0.16em;
+		letter-spacing: 0.14em;
 	}
 
-	.scratch-card-label {
-		font-size: 1.25rem;
+	.hero-names {
+		font-size: clamp(1.9rem, 8.5vw, 2.6rem);
+		line-height: 1.2;
+	}
+
+	.hero-date {
+		font-size: 0.95rem;
+	}
+
+	.hero-divider {
+		width: min(240px, 68vw);
+		margin: 1.1rem auto 1rem;
+	}
+
+	.save-the-date-container {
+		width: min(84vw, 340px);
+		margin: 1.5rem auto;
+	}
+
+	.scratch-card-container {
+		margin: 1.25rem auto;
 	}
 
 	.scratch-card-frame {
+		width: min(88vw, 320px);
+		padding: 0.5rem;
+	}
+
+	.scratch-card {
+		height: 180px;
+	}
+
+	.hero-pre#heroQuote {
+		font-size: 0.85rem;
+		line-height: 1.6;
+	}
+
+	.hero-cta {
+		margin-top: 1.5rem;
+		padding: 0.85rem 1.5rem;
+		font-size: 0.9rem;
+	}
+
+	.scroll-indicator {
+		bottom: 1rem;
+	}
+
+	/* Couple photo / save-the-date section */
+	.couple-photo-container {
+		width: min(92vw, 420px);
+		margin: 1.5rem auto;
+		padding: 0.6rem;
+	}
+
+	/* Wedding schedule cards */
+	.venue-schedule-card {
+		padding: 2rem 1.25rem;
+	}
+
+	/* Venue info + map */
+	.venue-info-card-spaced {
+		padding: 1.5rem;
+	}
+
+	.venue-map-card-spaced {
+		padding: 0.9rem;
+	}
+
+	.map-wrapper iframe {
+		min-height: 240px;
+	}
+
+	.venue-address-compact {
+		font-size: 0.98rem;
+	}
+
+	.directions-btn-spaced {
 		width: 100%;
-		max-width: 320px;
+	}
+
+	.directions-btn {
+		width: 100%;
+	}
+
+	/* Closing message */
+	.closing-script {
+		font-size: clamp(1.8rem, 8vw, 2.4rem);
+	}
+
+	.closing-names {
+		font-size: clamp(1.9rem, 8vw, 2.6rem);
+	}
+
+	.closing-note {
+		font-size: 0.92rem;
+	}
+
+	/* FLAMES section — stack everything vertically, it reads much better */
+	.flames-card {
+		padding: 1.75rem 1.1rem;
 	}
 
 	.flames-names-row {
-		gap: 0.8rem;
+		gap: 0.7rem;
 		flex-direction: column;
+		margin-bottom: 1.5rem;
 	}
 
 	.flames-name-block {
@@ -2443,7 +2511,7 @@ input[type="text"],
 	}
 
 	.flames-name-label {
-		font-size: 0.8rem;
+		font-size: 0.78rem;
 	}
 
 	.flames-name-value {
@@ -2451,30 +2519,111 @@ input[type="text"],
 	}
 
 	.flames-heart {
-		font-size: 1.5rem;
-		margin: 0.4rem 0;
+		font-size: 1.4rem;
+		margin: 0.2rem 0;
+	}
+
+	.flames-letters-row {
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.flames-row-label {
+		width: 100%;
+		min-width: auto;
+		text-align: center;
+	}
+
+	.flames-letter {
+		width: 30px;
+		height: 30px;
+		font-size: 0.85rem;
 	}
 
 	.flames-word-letter {
-		width: 30px;
-		height: 38px;
-		font-size: 1.05rem;
+		width: 32px;
+		height: 40px;
+		font-size: 1.1rem;
+	}
+
+	.flames-user-inputs-row {
+		flex-direction: column;
+		gap: 0.7rem;
+	}
+
+	.flames-heart-small {
+		transform: rotate(90deg);
+		margin: 0.1rem 0;
+	}
+
+	.flames-user-input {
+		max-width: 280px;
+	}
+
+	/* Footer + floating music/translate widget */
+	.site-footer {
+		padding: 1.1rem 1rem 1.5rem;
+		font-size: 0.85rem;
+	}
+
+	.music-player-widget {
+		bottom: 1rem;
+		left: 1rem;
+		gap: 0.4rem;
+	}
+
+	.music-player-btn {
+		width: 42px;
+		height: 42px;
 	}
 }
 
-/* ── Breakpoint 1: Small Mobile (320px to 374px) ── */
-@media (max-width: 374px) {
+/* ── Small mobile (≤420px) ── */
+@media (max-width: 420px) {
 	.hero-names {
-		font-size: 1.85rem;
+		font-size: clamp(1.7rem, 9vw, 2.2rem);
 	}
 
 	.hero-pre {
 		font-size: 0.85rem;
-		letter-spacing: 0.12em;
+		letter-spacing: 0.1em;
 	}
 
-	.scratch-card-label {
-		font-size: 1.15rem;
+	.scratch-card-frame {
+		width: 100%;
+		max-width: 280px;
+	}
+
+	.scratch-date {
+		font-size: 1.7rem;
+	}
+
+	.flames-result-word {
+		font-size: 2.2rem;
+	}
+
+	.flames-result-desc {
+		font-size: 0.88rem;
+	}
+
+	.venue-schedule-card,
+	.flames-card {
+		padding: 1.5rem 1rem;
+	}
+}
+
+/* ── Very small mobile (≤359px) ── */
+@media (max-width: 359px) {
+	.entry-logo-button {
+		width: min(86vw, 260px);
+	}
+
+	.hero-names {
+		font-size: 1.7rem;
+	}
+
+	.hero-content {
+		padding: 2.1rem 0.9rem 2.4rem;
 	}
 
 	.flames-letter {
@@ -2484,17 +2633,13 @@ input[type="text"],
 	}
 
 	.flames-word-letter {
-		width: 23px;
+		width: 24px;
 		height: 30px;
-		font-size: 0.85rem;
+		font-size: 0.88rem;
 	}
 
 	.flames-result-word {
-		font-size: 1.5rem;
-	}
-
-	.flames-result-desc {
-		font-size: 0.88rem;
+		font-size: 1.7rem;
 	}
 
 	.music-player-widget {
@@ -2502,26 +2647,14 @@ input[type="text"],
 		left: 0.8rem;
 		padding: 4px;
 	}
-}
 
-/* FLAMES Stacking below 560px */
-@media (max-width: 559px) {
-	.flames-user-inputs-row {
-		flex-direction: column;
-		gap: 0.7rem;
-	}
-
-	.flames-heart-small {
-		transform: rotate(90deg);
-		margin: 0.15rem 0;
-	}
-
-	.flames-user-input {
-		max-width: 280px;
+	.music-player-btn {
+		width: 38px;
+		height: 38px;
 	}
 }
 
-/* Landscape mobile orientation support */
+/* ── Landscape mobile orientation ── */
 @media (max-height: 520px) and (orientation: landscape) {
 	.hero {
 		min-height: auto;
@@ -2529,12 +2662,18 @@ input[type="text"],
 	}
 
 	.entry-logo-button {
-		width: min(84vh, 320px);
+		width: min(70vh, 300px);
+	}
+
+	.save-the-date-container,
+	.scratch-card-container {
+		margin: 1rem auto;
 	}
 }
 
-/* Disable hover transformations on touch devices */
+/* ── Disable hover transformations on touch devices ── */
 @media (hover: none) {
+
 	.entry-logo-button:hover,
 	.hero-cta:hover,
 	.directions-btn:hover,
