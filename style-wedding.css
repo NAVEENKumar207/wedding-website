@@ -2670,37 +2670,191 @@ input[type="text"],
 		margin: 1rem auto;
 	}
 
-/* ── Temple card premium design ── */
-.wedding-temple-card {
-	border: 2px solid #d8b65a !important; /* Gold/Saffron border */
-	background: linear-gradient(135deg, rgba(255, 253, 247, 0.96) 0%, rgba(253, 245, 230, 0.98) 100%) !important;
+/* ── Premium Invitation Cards ── */
+.invitation-card {
+	width: 100%;
+	max-width: 450px;
+	min-height: 680px;
+	padding: 3rem 2rem 2.5rem;
+	border-radius: 24px;
+	box-shadow: var(--shadow-strong), 0 15px 45px rgba(0,0,0,0.12);
 	position: relative;
 	overflow: hidden;
-}
-
-.wedding-temple-card:hover {
-	border-color: #ff9933 !important;
-	box-shadow: 0 28px 65px rgba(230, 110, 30, 0.16), 0 0 35px rgba(255, 153, 51, 0.25) !important;
-}
-
-.temple-toran {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 15px;
-	z-index: 10;
-	overflow: hidden;
-	opacity: 0.9;
-}
-
-.temple-gopuram-icon {
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
 	align-items: center;
-	color: #c99a35; /* Ochre / gold */
-	margin: 0.5rem auto 1rem;
-	filter: drop-shadow(0 2px 4px rgba(130, 110, 80, 0.15));
+	text-align: center;
+	border: 3px solid rgba(255, 255, 255, 0.45);
+	transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+	color: #2e2618;
+}
+
+.invitation-card:hover {
+	transform: translateY(-8px);
+	box-shadow: 0 35px 80px rgba(80, 60, 30, 0.2), 0 15px 40px rgba(0,0,0,0.15);
+}
+
+/* Reception Card Specific */
+.reception-card-box {
+	background-image: url('images/reception_bg.png');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+/* Wedding Card Specific */
+.wedding-card-box {
+	background-image: url('images/wedding_bg.png');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	border-color: rgba(216, 182, 90, 0.6);
+}
+
+/* Invitation Card Typography */
+.invitation-card .card-invite-label {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 1.05rem;
+	font-weight: 600;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: #4a3e2e;
+	margin-bottom: 0.2rem;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
+}
+
+.invitation-card .card-invite-sub {
+	font-family: 'Cormorant Garamond', serif;
+	font-size: 1.25rem;
+	font-style: italic;
+	color: #71624a;
+	margin-bottom: 0.8rem;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
+}
+
+.invitation-card .card-main-title {
+	font-family: 'Great Vibes', cursive;
+	font-size: clamp(3.2rem, 8vw, 4.2rem);
+	line-height: 1.1;
+	margin: 0 0 1rem;
+	font-weight: 400;
+}
+
+.reception-card-box .card-main-title {
+	color: #7c1a2e; /* Crimson maroon */
+	text-shadow: 0 2px 4px rgba(255, 255, 255, 0.7);
+}
+
+.wedding-card-box .card-main-title {
+	color: #6a1a08; /* Deep brown-red */
+	text-shadow: 0 2px 4px rgba(255, 255, 255, 0.7);
+}
+
+.invitation-card .card-connector {
+	font-family: 'Cormorant Garamond', serif;
+	font-size: 1.25rem;
+	font-style: italic;
+	margin: 0.6rem 0;
+	color: #5a4e3e;
+}
+
+.invitation-card .card-date-tag {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 1.1rem;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	color: #2e2618;
+	margin: 0.4rem 0;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
+}
+
+.invitation-card .card-time-tag {
+	font-family: 'Cormorant Garamond', serif;
+	font-size: 1.5rem;
+	font-weight: 600;
+	color: #b89030;
+	margin: 0.4rem 0 1.2rem;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
+}
+
+.wedding-card-box .card-time-tag {
+	color: #925807; /* Brighter gold/brown on orange */
+}
+
+.invitation-card .card-venue-section {
+	margin: 1.2rem 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.invitation-card .card-venue-label {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 0.85rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.15em;
+	color: #71624a;
+	margin-bottom: 0.4rem;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
+}
+
+.invitation-card .card-venue-name {
+	font-family: 'Cormorant Garamond', serif;
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: #2e2618;
+	margin-bottom: 0.3rem;
+	line-height: 1.3;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
+}
+
+.invitation-card .card-venue-address {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 0.88rem;
+	line-height: 1.5;
+	color: #554838;
+	margin-bottom: 1.2rem;
+	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
+}
+
+/* Actions styling inside invitation cards */
+.invitation-card .card-actions {
+	display: flex;
+	gap: 0.8rem;
+	justify-content: center;
+	flex-wrap: wrap;
+	margin-bottom: 1.2rem;
+	width: 100%;
+	z-index: 5;
+}
+
+.invitation-card .card-actions .calendar-btn,
+.invitation-card .card-actions .directions-btn {
+	margin: 0;
+	min-height: 40px;
+	padding: 0.5rem 1.2rem;
+	font-size: 0.85rem;
+	box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
+
+/* Map wrapper inside invitation cards */
+.invitation-card .card-map-wrapper {
+	width: 100%;
+	height: 200px;
+	border-radius: 16px;
+	overflow: hidden;
+	border: 1px solid rgba(242, 213, 116, 0.18);
+	box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+	margin-top: auto; /* Push map to the bottom */
+	z-index: 5;
+}
+
+.invitation-card .card-map-wrapper iframe {
+	display: block;
+	width: 100%;
+	height: 100%;
+	border: 0;
 }
 
 /* ── Disable hover transformations on touch devices ── */
@@ -2715,12 +2869,13 @@ input[type="text"],
 	.venue-info-card:hover,
 	.venue-schedule-card:hover,
 	.venue-map-card:hover,
+	.invitation-card:hover,
 	.flames-card:hover {
 		transform: none !important;
 	}
 
-	.wedding-temple-card:hover {
-		border-color: #d8b65a !important;
+	.reception-card-box:hover,
+	.wedding-card-box:hover {
 		box-shadow: var(--shadow-strong) !important;
 	}
 
