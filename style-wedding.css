@@ -1679,16 +1679,14 @@ button:focus-visible {
 	}
 }
 
-/* ══════════════════════════════════════════════════════════════════════════
-	 SIDE-BY-SIDE SCHEDULE LAYOUT
-══════════════════════════════════════════════════════════════════════════ */
+/* ── VERTICAL SCHEDULE LAYOUT ── */
 .venue-schedule-grid {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 2.5rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 3.5rem;
 	margin-top: 2.5rem;
-	width: min(1100px, 100%);
-	margin-inline: auto;
+	width: 100%;
 }
 
 .schedule-date-tag {
@@ -2297,10 +2295,9 @@ input[type="text"],
 	}
 
 	.venue-schedule-grid {
-		grid-template-columns: 1fr;
 		max-width: 580px;
 		margin-inline: auto;
-		gap: 1.5rem;
+		gap: 2.5rem;
 	}
 
 	.venue-grid-split {
@@ -2696,18 +2693,12 @@ input[type="text"],
 
 /* Reception Card Specific */
 .reception-card-box {
-	background-image: url('images/reception_bg.png');
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
+	background: url('images/reception_bg.png') no-repeat center center / cover !important;
 }
 
 /* Wedding Card Specific */
 .wedding-card-box {
-	background-image: url('images/wedding_bg.png');
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
+	background: url('images/wedding_bg.png') no-repeat center center / cover !important;
 	border-color: rgba(216, 182, 90, 0.6);
 }
 
