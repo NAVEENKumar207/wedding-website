@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tharun &amp; Poongodi — A Love Story</title>
+  <meta name="description"
+    content="Join us to celebrate the wedding of Tharun R and Poongodi S on 30.08.2026 — a timeless love story told through memories, moments, and milestones." />
+  <link rel="icon" type="image/png" href="images/logo.png" />
+  <link rel="apple-touch-icon" href="images/logo.png" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap"
+    rel="stylesheet" />
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.x/dist/index.umd.js"></script>
+
+
+  <!-- canvas-confetti — powers the full-screen "Reveal Destiny" blast -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <link rel="stylesheet" href="style-wedding.css?v=1.7" />
+</head>
+
+<body class="site-locked">
+
+  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       INTRO â€” CLICK LOGO TO ENTER
+  â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+  <div class="entry-screen" id="entryScreen" aria-label="Tap the logo to enter the wedding website">
+    <div class="entry-screen-bg" aria-hidden="true">
+      <img src="images/logo.png" alt="" class="entry-screen-bg-img" />
+    </div>
+    <button class="entry-logo-button" id="entryLogoButton" type="button" aria-label="Open wedding website">
+      <span class="entry-logo-ring"></span>
+      <img src="images/logo.png" alt="Tharun and Poongodi logo" class="entry-logo-image" />
+    </button>
+  </div>
+
+  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       CURSOR GLOW
+  ══════════════════════════════════════════════════════════════════════════ -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+  <div id="fireworks" aria-hidden="true"></div>
+
+  <!-- ══════════════════════════════════════════════════════════════════════════
+       SECTION 1 — HERO
+  ══════════════════════════════════════════════════════════════════════════ -->
+  <section id="hero" class="hero">
+    <div class="hero-bg">
+      <img src="images/hero_bg.png" alt="Wedding background" class="hero-bg-img" id="heroBgImg" />
+      <div class="hero-overlay"></div>
+    </div>
+
+    <!-- Floating petals -->
+    <div class="petals-container" id="petalsContainer"></div>
+
+    <div class="hero-content">
+      <div class="hero-monogram" aria-hidden="true">
+        <span class="hero-monogram-letter">T</span>
+        <span class="hero-monogram-amp">&amp;</span>
+        <span class="hero-monogram-letter">P</span>
+      </div>
+      <p class="hero-pre" id="heroPreTitle" data-translate="heroPreTitle">Together Forever</p>
+
+      <!-- Save the Date Caricature Placeholder -->
+      <div class="save-the-date-container" id="saveTheDateContainer">
+        <div class="save-the-date-frame">
+          <img src="images/couple.png" alt="Tharun and Poongodi - The Couple" class="save-the-date-placeholder-img" />
+          <div class="save-the-date-overlay">Save the Date</div>
+        </div>
+      </div>
+
+      <h1 class="hero-names" id="heroNames">
+        <span class="hero-name-groom" data-translate="heroGroom">Tharun R</span>
+        <span class="hero-ampersand">&amp;</span>
+        <span class="hero-name-bride" data-translate="heroBride">Poongodi S</span>
+      </h1>
+
+      <p class="hero-date" id="heroDate">30.08.2026</p>
+
+      <div class="hero-divider" id="heroDivider">
+        <span class="divider-line"></span>
+        <span class="divider-icon">♥</span>
+        <span class="divider-line"></span>
+      </div>
+
+      <!-- Scratch Card Reveal -->
+      <div class="scratch-card-container" id="scratchCardContainer">
+        <div class="scratch-card-frame">
+          <div class="scratch-card" id="scratchCard">
+            <canvas id="scratchCanvas" width="320" height="200"></canvas>
+            <div class="scratch-card-reveal" id="scratchReveal">
+              <span class="scratch-reveal-icon">♥</span>
+              <p class="scratch-date" data-translate="scratchDate">30 Aug 2026</p>
+              <p class="scratch-time" data-translate="scratchTime">Wedding · 8:00 AM Onwards</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="hero-pre" id="heroQuote" data-translate="heroQuote">
+        "In all the world, there is no heart for me like yours.<br />In all the world, there is no love for you like
+        mine."
+      </p>
+      <a href="#gallery3d" class="hero-cta" id="heroCta" data-translate="heroCta">Begin the Journey</a>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator" id="scrollIndicator">
+      <span class="scroll-text">Scroll</span>
+      <div class="scroll-arrow">
+        <div class="scroll-arrow-inner"></div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ══════════════════════════════════════════════════════════════════════════
+       SECTION 4.5 — COUPLE PHOTO DISPLAY
+  ══════════════════════════════════════════════════════════════════════════ -->
+  <section id="gallery3d" class="gallery3d-section couple-photo-section">
+    <div class="glitter-overlay"></div>
+    <div class="venue-bg"></div>
+    <div class="gallery3d-header" id="gallery3dHeader">
+      <p class="section-pre">Together Forever</p>
+      <h2 class="section-title glitter-text">Save the Date</h2>
+      <div class="section-divider">
+        <span class="divider-line"></span>
+        <span class="divider-icon">♥</span>
+        <span class="divider-line"></span>
+      </div>
+    </div>
+
+    <div class="couple-photo-container">
+      <div class="couple-photo-frame-new">
+        <img src="images/couple_new.jpg" alt="Tharun and Poongodi - Save the Date" class="couple-photo-new" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════════════════
+       SECTION 5 — THE WEDDING SCHEDULE
+  ══════════════════════════════════════════════════════════════════════════ -->
+  <section id="schedule" class="venue-section">
+    <div class="glitter-overlay"></div>
+    <div class="venue-bg"></div>
+
+    <div class="venue-content">
+      <div class="venue-header" id="scheduleHeader">
+        <p class="section-pre" data-translate="schedulePre">Celebrate With Us</p>
+        <h2 class="section-title glitter-text" data-translate="scheduleTitle">Wedding Details</h2>
+        <div class="section-divider">
+          <span class="divider-line"></span>
+          <span class="divider-icon">♥</span>
+          <span class="divider-line"></span>
+        </div>
+      </div>
+
+      <div class="venue-schedule-grid" id="venueScheduleGrid">
+        <!-- Reception Card -->
+        <div class="venue-schedule-card" id="receptionScheduleCard" style="padding: 2.5rem 2rem; text-align: center;">
+          <h3 class="venue-card-title venue-card-title-center" data-translate="receptionTitle">✨ Wedding Reception</h3>
+          <p class="schedule-date-tag" data-translate="receptionTime"
+            style="margin: 0; font-size: 1.15rem; color: var(--text);">Saturday, 29.08.2026 · 6:00 PM Onwards</p>
+          <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding+Reception+-+Tharun+%26+Poongodi&dates=20260829T123000Z/20260829T163000Z&details=Join+us+to+celebrate+the+wedding+reception+of+Tharun+and+Poongodi+at+Sri+Vaitheeswara+Mahal%2C+Salem.&location=Sri+Vaitheeswara+Mahal%2C+Salem%2C+Tamil+Nadu"
+            target="_blank" rel="noopener" class="calendar-btn" data-translate="addToCalendar">
+            📅 Add to Calendar
+          </a>
+        </div>
+
+        <!-- Wedding Card -->
+        <div class="venue-schedule-card" id="weddingScheduleCard" style="padding: 2.5rem 2rem; text-align: center;">
+          <h3 class="venue-card-title venue-card-title-center" data-translate="weddingTitle">💍 The Wedding (Muhurtham)
+          </h3>
+          <p class="schedule-date-tag" data-translate="weddingTime"
+            style="margin: 0; font-size: 1.15rem; color: var(--text);">Sunday, 30.08.2026 · 8:00 AM Onwards</p>
+          <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding+%28Muhurtham%29+-+Tharun+%26+Poongodi&dates=20260830T023000Z/20260830T083000Z&details=Join+us+for+the+wedding+muhurtham+of+Tharun+and+Poongodi+at+Sri+Vaitheeswara+Mahal%2C+Salem.&location=Sri+Vaitheeswara+Mahal%2C+Salem%2C+Tamil+Nadu"
+            target="_blank" rel="noopener" class="calendar-btn" data-translate="addToCalendar">
+            📅 Add to Calendar
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════════════════
+       SECTION 5.5 — LOVE DESTINY (FLAMES)
+  ══════════════════════════════════════════════════════════════════════════ -->
+  <section id="flames" class="venue-section flames-section">
+    <div class="glitter-overlay"></div>
+    <div class="venue-bg"></div>
+
+    <div class="venue-content">
+      <div class="venue-header" id="flamesHeader">
+        <p class="section-pre" data-translate="flamesPre">Cosmic Match</p>
+        <h2 class="section-title glitter-text" data-translate="flamesTitle">Love Destiny</h2>
+        <div class="section-divider">
+          <span class="divider-line"></span>
+          <span class="divider-icon">♥</span>
+          <span class="divider-line"></span>
+        </div>
+        <p class="flames-subtitle" data-translate="flamesSubtitle">Witness the cosmic bond being calculated — the good
+          old F.L.A.M.E.S. way.</p>
+      </div>
+
+      <!-- Couple's FLAMES card -->
+      <div class="flames-card" id="flamesCoupleCard">
+        <div class="flames-names-row">
+          <div class="flames-name-block">
+            <span class="flames-name-label" data-translate="flamesGroomLabel">Groom</span>
+            <span class="flames-name-value">Tharun R</span>
+          </div>
+          <span class="flames-heart" aria-hidden="true">♥</span>
+          <div class="flames-name-block">
+            <span class="flames-name-label" data-translate="flamesBrideLabel">Bride</span>
+            <span class="flames-name-value">Poongodi S</span>
+          </div>
+        </div>
+
+        <div class="flames-letters-grid">
+          <div class="flames-letters-row">
+            <span class="flames-row-label" data-translate="flamesGroomLabel">Groom</span>
+            <div class="flames-letters" id="flamesCoupleRowA"></div>
+          </div>
+          <div class="flames-letters-row">
+            <span class="flames-row-label" data-translate="flamesBrideLabel">Bride</span>
+            <div class="flames-letters" id="flamesCoupleRowB"></div>
+          </div>
+        </div>
+
+
+        <p class="flames-hint" id="flamesCoupleHint" data-translate="flamesCoupleHint">Tap reveal to let FLAMES decide.
+        </p>
+        <button class="flames-reveal-btn" id="flamesCoupleBtn" type="button" data-translate="flamesCoupleBtn">Reveal
+          Destiny</button>
+
+        <div class="flames-result" id="flamesCoupleResult" aria-live="polite">
+          <div class="flames-word-row" id="flamesCoupleWordRow"></div>
+          <p class="flames-result-says" data-translate="flamesDestinySays">Destiny says…</p>
+          <p class="flames-result-word" id="flamesCoupleResultWord"></p>
+          <p class="flames-result-desc" id="flamesCoupleResultDesc"></p>
+        </div>
+      </div>
+
+      <div class="flames-or">
+        <span class="divider-line"></span>
+        <span data-translate="flamesTryYourself">Try It Yourself</span>
+        <span class="divider-line"></span>
+      </div>
+
+      <!-- User's own FLAMES card -->
+      <div class="flames-card flames-card-user" id="flamesUserCard">
+        <p class="flames-user-intro" data-translate="flamesUserIntro">Curious about your own destiny? Enter any two
+          names below to calculate.</p>
+
+        <div class="flames-user-form">
+          <div class="flames-user-inputs-row">
+            <input type="text" id="flamesUserInputA" class="flames-user-input" placeholder="Enter First Name"
+              maxlength="40" autocomplete="off" data-translate="flamesInputPlaceholderA" />
+            <span class="flames-heart-small" aria-hidden="true">♥</span>
+            <input type="text" id="flamesUserInputB" class="flames-user-input" placeholder="Enter Second Name"
+              maxlength="40" autocomplete="off" data-translate="flamesInputPlaceholderB" />
+          </div>
+
+          <button class="flames-reveal-btn" id="flamesUserBtn" type="button" data-translate="flamesUserBtn">Find FLAMES
+            Destiny</button>
+        </div>
+
+        <p class="flames-user-error" id="flamesUserError" role="alert"></p>
+
+        <div class="flames-letters-grid" id="flamesUserLettersGrid" hidden>
+          <div class="flames-letters-row">
+            <div class="flames-letters" id="flamesUserRowA"></div>
+          </div>
+          <div class="flames-letters-row">
+            <div class="flames-letters" id="flamesUserRowB"></div>
+          </div>
+        </div>
+
+        <div class="flames-result" id="flamesUserResult" aria-live="polite">
+          <div class="flames-word-row" id="flamesUserWordRow"></div>
+          <p class="flames-result-says" data-translate="flamesDestinySays">Destiny says…</p>
+          <p class="flames-result-word" id="flamesUserResultWord"></p>
+          <p class="flames-result-desc" id="flamesUserResultDesc"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════════════════
+       SECTION 6 — VENUE DETAILS
+  ══════════════════════════════════════════════════════════════════════════ -->
+  <section id="venue" class="venue-section venue-section-bordered">
+    <div class="glitter-overlay"></div>
+    <div class="venue-bg"></div>
+
+    <div class="venue-content" id="venueContent">
+      <div class="venue-header" id="venueHeader">
+        <p class="section-pre" data-translate="venuePre">Location &amp; Map</p>
+        <h2 class="section-title glitter-text" data-translate="venueTitle">The Venue</h2>
+        <div class="section-divider">
+          <span class="divider-line"></span>
+          <span class="divider-line"></span>
+        </div>
+      </div>
+
+      <div class="venue-grid venue-grid-split">
+        <!-- Venue Details -->
+        <div class="venue-info-card venue-info-card-spaced" id="venueInfoCard">
+          <h3 class="venue-card-title" data-translate="venueName">📍 Sri Vaitheeswara Mahal</h3>
+          <p class="venue-name venue-name-accent" data-translate="venueType">Marriage Hall</p>
+          <p class="venue-address venue-address-compact" data-translate="venueAddress">
+            No: 6/89, Sathiamangalam,<br />
+            Kullampatty (P.O), Valasaiyur,<br />
+            Salem - 636103, Tamil Nadu
+          </p>
+          <div class="venue-contact venue-contact-separated">
+          </div>
+          <a href="https://maps.app.goo.gl/VSptCUPxQpXYpWmh7" target="_blank" rel="noopener"
+            class="directions-btn directions-btn-spaced" id="directionsBtn">
+            <span data-translate="venueDirections">🚗 Get Directions</span>
+          </a>
+        </div>
+
+        <!-- Map Card -->
+        <div class="venue-map-card venue-map-card-spaced" id="venueMapCard">
+          <div class="map-wrapper map-wrapper-venue">
+            <iframe
+              src="https://maps.google.com/maps?q=Sri%20Vaitheeswara%20Mahal,%20Salem,%20Tamil%20Nadu&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              width="100%" height="340" allowfullscreen="" loading="lazy"
+              title="Wedding Venue Location — Sri Vaitheeswara Mahal, Salem"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Closing message -->
+      <div class="venue-closing" id="venueClosing">
+        <p class="closing-script" data-translate="closingScript">With love &amp; joy,</p>
+        <p class="closing-names" data-translate="closingNames">Tharun R &amp; Poongodi S</p>
+        <p class="closing-note" data-translate="closingNote">We look forward to celebrating this beautiful milestone
+          with you.<br />Your presence is
+          our greatest gift. 🙏</p>
+        <div class="closing-hearts">
+          <span>♥</span><span>♥</span><span>♥</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating Controls (Music + Translate) -->
+  <div class="music-player-widget" id="musicPlayerWidget">
+    <button class="music-player-btn" id="musicPlayPauseBtn" aria-label="Toggle background music">
+      <span class="music-icon" id="musicIcon">
+        <svg class="music-svg" viewBox="0 0 24 24" width="24" height="24">
+          <defs>
+            <linearGradient id="musicGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#8a6a1c" />
+              <stop offset="30%" stop-color="#d8b65a" />
+              <stop offset="50%" stop-color="#fdf0c8" />
+              <stop offset="70%" stop-color="#c99a35" />
+              <stop offset="100%" stop-color="#7c5c14" />
+            </linearGradient>
+          </defs>
+          <path d="M9 18V5l12-2v13" fill="none" stroke="url(#musicGoldGrad)" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" />
+          <circle cx="6" cy="18" r="3" fill="url(#musicGoldGrad)" />
+          <circle cx="18" cy="16" r="3" fill="url(#musicGoldGrad)" />
+        </svg>
+      </span>
+      <span class="music-eq" id="musicPlayerEq">
+        <span></span><span></span><span></span><span></span>
+      </span>
+    </button>
+    <button class="music-player-btn" id="translateBtn" aria-label="Translate Website">
+      <span class="music-icon" id="translateIcon">
+        <svg class="translate-svg" viewBox="0 0 24 24" width="28" height="28">
+          <defs>
+            <linearGradient id="translateGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#8a6a1c" />
+              <stop offset="30%" stop-color="#d8b65a" />
+              <stop offset="50%" stop-color="#fdf0c8" />
+              <stop offset="70%" stop-color="#c99a35" />
+              <stop offset="100%" stop-color="#7c5c14" />
+            </linearGradient>
+          </defs>
+          <path d="M3.5 15.5l3.5-8 3.5 8M4.5 13h5" fill="none" stroke="url(#translateGoldGrad)" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M15 14.5c0-.8.6-1.5 1.4-1.5s1.4.7 1.4 1.5c0 .9-.8 1.3-1.6 1.3h2.1v-2.8M18.8 11.5v5.5" fill="none"
+            stroke="url(#translateGoldGrad)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M11.5 9.5a3 3 0 0 1 1 5" fill="none" stroke="url(#translateGoldGrad)" stroke-width="1.2"
+            stroke-linecap="round" />
+          <path d="M12.5 14.5l1-.5v1" fill="none" stroke="url(#translateGoldGrad)" stroke-width="1.2"
+            stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </span>
+    </button>
+    <audio id="bgMusic" loop>
+      <source src="images/audio.mp3" type="audio/mp3">
+    </audio>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p data-translate="footerText">Created with <span class="footer-heart">♥</span> by Naveenkumar and team · 30.08.2026
+    </p>
+  </footer>
+
+  <script src="script-wedding.js?v=1.7"></script>
+</body>
+
+</html>
