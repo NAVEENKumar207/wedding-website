@@ -482,56 +482,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 // ── VENUE ─ Scroll Animations ──────────────────────────────────
 (function animateVenue() {
-  gsap.fromTo('#venueHeader', {
-    y: 40, opacity: 0
-  }, {
-    y: 0, opacity: 1,
-    duration: 1.2,
-    ease: 'power4.out',
-    scrollTrigger: {
-      trigger: '#venueHeader',
-      start: 'top 85%',
-      toggleActions: 'play none none reverse',
-    }
-  });
-
-  gsap.fromTo('#venueInfoCard', {
-    x: -40, y: 30, opacity: 0
-  }, {
-    x: 0, y: 0, opacity: 1,
-    duration: 1.4,
-    ease: 'power4.out',
-    scrollTrigger: {
-      trigger: '#venueInfoCard',
-      start: 'top 80%',
-      toggleActions: 'play none none reverse',
-    }
-  });
-
-  // 3D perspective flip-and-scale reveal for #venueMapCard
-  gsap.fromTo('#venueMapCard', {
-    rotationY: -25,
-    rotationX: 15,
-    scale: 0.9,
-    opacity: 0,
-    transformPerspective: 1000,
-    transformOrigin: "center center"
-  }, {
-    rotationY: 0,
-    rotationX: 0,
-    scale: 1,
-    opacity: 1,
-    duration: 1.5,
-    ease: 'power4.out',
-    scrollTrigger: {
-      trigger: '#venueMapCard',
-      start: 'top 80%',
-      toggleActions: 'play none none reverse',
-    }
-  });
-
-
-
   gsap.fromTo('#venueClosing', {
     y: 30, opacity: 0
   }, {
@@ -674,11 +624,15 @@ const translations = {
     closingNames: "Tharun R & Poongodi S",
     closingNote: "We look forward to celebrating this beautiful milestone with you.<br />Your presence is our greatest gift. 🙏",
     schedulePre: "Celebrate With Us",
-    scheduleTitle: "Wedding Details",
+    scheduleTitle: "Wedding Details & Venues",
     receptionTitle: "✨ Wedding Reception",
     receptionTime: "Saturday, 29.08.2026 · 6:00 PM Onwards",
+    receptionVenueName: "📍 Sri Vaitheeswara Mahal",
+    receptionAddress: "No: 6/89, Sathiamangalam,<br />Kullampatty (P.O), Valasaiyur,<br />Salem - 636103, Tamil Nadu",
     weddingTitle: "💍 The Wedding (Muhurtham)",
     weddingTime: "Sunday, 30.08.2026 · 8:00 AM Onwards",
+    weddingVenueName: "📍 Sengunthar Arulmigu Kumaraguru Subramaniyaswamy Temple",
+    weddingAddress: "149, TVK Road, Ammapet,<br />Salem - 636003, Tamil Nadu",
     addToCalendar: "📅 Add to Calendar",
     flamesPre: "Cosmic Match",
     flamesTitle: "Love Destiny",
@@ -745,11 +699,15 @@ const translations = {
     closingNames: "தருண் R & பூங்கொடி S",
     closingNote: "இந்த அழகான தருணத்தைக் கொண்டாட உங்களை மகிழ்ச்சியோடு எதிர்நோக்குகிறோம்.<br />உங்கள் வருகையே எங்களுக்கு மிகப்பெரிய ஆசீர்வாதம். 🙏",
     schedulePre: "எங்களுடன் கொண்டாடுங்கள்",
-    scheduleTitle: "திருமண விவரங்கள்",
+    scheduleTitle: "திருமண விவரங்கள் & இடங்கள்",
     receptionTitle: "✨ திருமண வரவேற்பு",
     receptionTime: "சனிக்கிழமை, 29.08.2026 · மாலை 6:00 மணி முதல்",
+    receptionVenueName: "📍 ஸ்ரீ வைத்தீஸ்வர மஹால்",
+    receptionAddress: "எண்: 6/89, சத்தியமங்கலம்,<br />குள்ளம்பட்டி (P.O), வலசையூர்,<br />சேலம் - 636103, தமிழ்நாடு",
     weddingTitle: "💍 திருமணம் (முகூர்த்தம்)",
     weddingTime: "ஞாயிற்றுக்கிழமை, 30.08.2026 · காலை 8:00 மணி முதல்",
+    weddingVenueName: "📍 செங்குந்தர் அருள்மிகு குமரகுரு சுப்ரமணியசுவாமி திருக்கோயில்",
+    weddingAddress: "149, த.வி.க சாலை, அம்மாப்பேட்டை,<br />சேலம் - 636003, தமிழ்நாடு",
     addToCalendar: "📅 காலண்டரில் சேர்க்கவும்",
     flamesPre: "பிரபஞ்ச பொருத்தம்",
     flamesTitle: "காதல் விதி",

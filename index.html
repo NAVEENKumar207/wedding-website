@@ -122,7 +122,7 @@
   </section>
 
   <!-- ══════════════════════════════════════════════════════════════════════════
-       SECTION 5 — THE WEDDING SCHEDULE
+       SECTION 5 — THE WEDDING SCHEDULE & VENUES
   ══════════════════════════════════════════════════════════════════════════ -->
   <section id="schedule" class="venue-section">
     <div class="glitter-overlay"></div>
@@ -131,7 +131,7 @@
     <div class="venue-content">
       <div class="venue-header" id="scheduleHeader">
         <p class="section-pre" data-translate="schedulePre">Celebrate With Us</p>
-        <h2 class="section-title glitter-text" data-translate="scheduleTitle">Wedding Details</h2>
+        <h2 class="section-title glitter-text" data-translate="scheduleTitle">Wedding Details &amp; Venues</h2>
         <div class="section-divider">
           <span class="divider-line"></span>
           <span class="divider-icon">♥</span>
@@ -141,73 +141,101 @@
 
       <div class="venue-schedule-grid" id="venueScheduleGrid">
         <!-- Reception Card -->
-        <div class="venue-schedule-card" id="receptionScheduleCard" style="padding: 2.5rem 2rem; text-align: center;">
+        <div class="venue-schedule-card" id="receptionScheduleCard" style="text-align: center;">
           <h3 class="venue-card-title venue-card-title-center" data-translate="receptionTitle">✨ Wedding Reception</h3>
           <p class="schedule-date-tag" data-translate="receptionTime"
             style="margin: 0; font-size: 1.15rem; color: var(--text);">Saturday, 29.08.2026 · 6:00 PM Onwards</p>
-          <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding+Reception+-+Tharun+%26+Poongodi&dates=20260829T123000Z/20260829T163000Z&details=Join+us+to+celebrate+the+wedding+reception+of+Tharun+and+Poongodi+at+Sri+Vaitheeswara+Mahal%2C+Salem.&location=Sri+Vaitheeswara+Mahal%2C+Salem%2C+Tamil+Nadu"
-            target="_blank" rel="noopener" class="calendar-btn" data-translate="addToCalendar">
-            📅 Add to Calendar
-          </a>
-        </div>
-
-        <!-- Wedding Card -->
-        <div class="venue-schedule-card" id="weddingScheduleCard" style="padding: 2.5rem 2rem; text-align: center;">
-          <h3 class="venue-card-title venue-card-title-center" data-translate="weddingTitle">💍 The Wedding (Muhurtham)
-          </h3>
-          <p class="schedule-date-tag" data-translate="weddingTime"
-            style="margin: 0; font-size: 1.15rem; color: var(--text);">Sunday, 30.08.2026 · 8:00 AM Onwards</p>
-          <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding+%28Muhurtham%29+-+Tharun+%26+Poongodi&dates=20260830T023000Z/20260830T083000Z&details=Join+us+for+the+wedding+muhurtham+of+Tharun+and+Poongodi+at+Sri+Vaitheeswara+Mahal%2C+Salem.&location=Sri+Vaitheeswara+Mahal%2C+Salem%2C+Tamil+Nadu"
-            target="_blank" rel="noopener" class="calendar-btn" data-translate="addToCalendar">
-            📅 Add to Calendar
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════════════════════════════════════════
-       SECTION 6 — VENUE DETAILS
-  ══════════════════════════════════════════════════════════════════════════ -->
-  <section id="venue" class="venue-section venue-section-bordered">
-    <div class="glitter-overlay"></div>
-    <div class="venue-bg"></div>
-
-    <div class="venue-content" id="venueContent">
-      <div class="venue-header" id="venueHeader">
-        <p class="section-pre" data-translate="venuePre">Location &amp; Map</p>
-        <h2 class="section-title glitter-text" data-translate="venueTitle">The Venue</h2>
-        <div class="section-divider">
-          <span class="divider-line"></span>
-          <span class="divider-line"></span>
-        </div>
-      </div>
-
-      <div class="venue-grid venue-grid-split">
-        <!-- Venue Details -->
-        <div class="venue-info-card venue-info-card-spaced" id="venueInfoCard">
-          <h3 class="venue-card-title" data-translate="venueName">📍 Sri Vaitheeswara Mahal</h3>
-          <p class="venue-name venue-name-accent" data-translate="venueType">Marriage Hall</p>
-          <p class="venue-address venue-address-compact" data-translate="venueAddress">
-            No: 6/89, Sathiamangalam,<br />
-            Kullampatty (P.O), Valasaiyur,<br />
-            Salem - 636103, Tamil Nadu
-          </p>
-          <div class="venue-contact venue-contact-separated">
+          
+          <div class="card-venue-info" style="margin: 1.5rem 0; font-size: 0.95rem;">
+            <p class="venue-card-name" data-translate="receptionVenueName" style="font-weight: 600; color: var(--gold-soft); font-size: 1.15rem; margin-bottom: 0.4rem;">📍 Sri Vaitheeswara Mahal</p>
+            <p class="venue-card-address" data-translate="receptionAddress" style="color: var(--muted); line-height: 1.5; font-style: normal;">
+              No: 6/89, Sathiamangalam,<br />
+              Kullampatty (P.O), Valasaiyur,<br />
+              Salem - 636103, Tamil Nadu
+            </p>
           </div>
-          <a href="https://maps.app.goo.gl/VSptCUPxQpXYpWmh7" target="_blank" rel="noopener"
-            class="directions-btn directions-btn-spaced" id="directionsBtn">
-            <span data-translate="venueDirections">🚗 Get Directions</span>
-          </a>
-        </div>
 
-        <!-- Map Card -->
-        <div class="venue-map-card venue-map-card-spaced" id="venueMapCard">
-          <div class="map-wrapper map-wrapper-venue">
+          <div class="card-actions-wrapper" style="display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem;">
+            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding+Reception+-+Tharun+%26+Poongodi&dates=20260829T123000Z/20260829T163000Z&details=Join+us+to+celebrate+the+wedding+reception+of+Tharun+and+Poongodi+at+Sri+Vaitheeswara+Mahal%2C+Salem.&location=Sri+Vaitheeswara+Mahal%2C+Salem%2C+Tamil+Nadu"
+              target="_blank" rel="noopener" class="calendar-btn" data-translate="addToCalendar" style="margin: 0; min-height: 40px; padding: 0.5rem 1rem; font-size: 0.9rem;">
+              📅 Add to Calendar
+            </a>
+            <a href="https://maps.app.goo.gl/VSptCUPxQpXYpWmh7" target="_blank" rel="noopener"
+              class="directions-btn" data-translate="venueDirections" style="margin: 0; min-height: 40px; padding: 0.5rem 1rem; font-size: 0.9rem;">
+              🚗 Get Directions
+            </a>
+          </div>
+
+          <div class="map-wrapper" style="margin-top: 1rem; border-radius: 12px; overflow: hidden; border: 1px solid rgba(242, 213, 116, 0.18);">
             <iframe
               src="https://maps.google.com/maps?q=Sri%20Vaitheeswara%20Mahal,%20Salem,%20Tamil%20Nadu&t=&z=15&ie=UTF8&iwloc=&output=embed"
-              width="100%" height="340" allowfullscreen="" loading="lazy"
-              title="Wedding Venue Location — Sri Vaitheeswara Mahal, Salem"></iframe>
+              width="100%" height="240" style="border: 0; display: block;" allowfullscreen="" loading="lazy"
+              title="Wedding Reception Venue — Sri Vaitheeswara Mahal, Salem"></iframe>
+          </div>
+        </div>
+
+        <!-- Wedding Card (Temple Look) -->
+        <div class="venue-schedule-card wedding-temple-card" id="weddingScheduleCard" style="text-align: center;">
+          <!-- Toran / Garland decoration SVG -->
+          <div class="temple-toran">
+            <svg viewBox="0 0 100 12" preserveAspectRatio="none" width="100%" height="15" style="display: block;">
+              <path d="M0,2 Q25,6 50,2 Q75,6 100,2" fill="none" stroke="#2E7D32" stroke-width="0.8" />
+              <path d="M12,2 Q14,8 12,11 Q10,8 12,2" fill="#2E7D32" />
+              <circle cx="20" cy="3.5" r="2.2" fill="#FF9933" />
+              <circle cx="20" cy="3.5" r="1.2" fill="#FFD700" />
+              <path d="M28,2 Q30,8 28,11 Q26,8 28,2" fill="#2E7D32" />
+              <circle cx="36" cy="4" r="2.2" fill="#FF9933" />
+              <circle cx="36" cy="4" r="1.2" fill="#FFD700" />
+              <path d="M44,2 Q46,8 44,11 Q42,8 44,2" fill="#2E7D32" />
+              <circle cx="50" cy="4.2" r="2.5" fill="#FF9933" />
+              <circle cx="50" cy="4.2" r="1.4" fill="#FFD700" />
+              <path d="M56,2 Q58,8 56,11 Q54,8 56,2" fill="#2E7D32" />
+              <circle cx="64" cy="4" r="2.2" fill="#FF9933" />
+              <circle cx="64" cy="4" r="1.2" fill="#FFD700" />
+              <path d="M72,2 Q74,8 72,11 Q70,8 72,2" fill="#2E7D32" />
+              <circle cx="80" cy="3.5" r="2.2" fill="#FF9933" />
+              <circle cx="80" cy="3.5" r="1.2" fill="#FFD700" />
+              <path d="M88,2 Q90,8 88,11 Q86,8 88,2" fill="#2E7D32" />
+            </svg>
+          </div>
+
+          <div class="temple-gopuram-icon">
+             <!-- Gopuram SVG Silhouette -->
+             <svg class="gopuram-svg" viewBox="0 0 100 100" width="50" height="50" style="color: #d4953c;">
+               <path d="M50 5 L55 18 L45 18 Z M43 18 L57 18 L59 34 L41 34 Z M39 34 L61 34 L64 52 L36 52 Z M34 52 L66 52 L70 75 L30 75 Z M26 75 L74 75 L76 95 L24 95 Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" />
+               <line x1="50" y1="18" x2="50" y2="95" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2,2" />
+               <circle cx="50" cy="3" r="1.5" fill="currentColor" />
+             </svg>
+          </div>
+
+          <h3 class="venue-card-title venue-card-title-center" data-translate="weddingTitle">💍 The Wedding (Muhurtham)</h3>
+          <p class="schedule-date-tag" data-translate="weddingTime"
+            style="margin: 0; font-size: 1.15rem; color: var(--text);">Sunday, 30.08.2026 · 8:00 AM Onwards</p>
+          
+          <div class="card-venue-info" style="margin: 1.5rem 0; font-size: 0.95rem;">
+            <p class="venue-card-name" data-translate="weddingVenueName" style="font-weight: 600; color: var(--gold-soft); font-size: 1.15rem; margin-bottom: 0.4rem;">📍 Sengunthar Arulmigu Kumaraguru Subramaniyaswamy Temple</p>
+            <p class="venue-card-address" data-translate="weddingAddress" style="color: var(--muted); line-height: 1.5; font-style: normal;">
+              149, TVK Road, Ammapet,<br />
+              Salem - 636003, Tamil Nadu
+            </p>
+          </div>
+
+          <div class="card-actions-wrapper" style="display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem;">
+            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding+%28Muhurtham%29+-+Tharun+%26+Poongodi&dates=20260830T023000Z/20260830T083000Z&details=Join+us+for+the+wedding+muhurtham+of+Tharun+and+Poongodi+at+Sengunthar+Arulmigu+Kumaraguru+Subramaniyaswamy+Temple%2C+Ammapet%2C+Salem.&location=Sengunthar+Arulmigu+Kumaraguru+Subramaniyaswamy+Temple%2C+Ammapet%2C+Salem"
+              target="_blank" rel="noopener" class="calendar-btn" data-translate="addToCalendar" style="margin: 0; min-height: 40px; padding: 0.5rem 1rem; font-size: 0.9rem;">
+              📅 Add to Calendar
+            </a>
+            <a href="https://maps.app.goo.gl/EtViuKBv3kMKt9B18" target="_blank" rel="noopener"
+              class="directions-btn" data-translate="venueDirections" style="margin: 0; min-height: 40px; padding: 0.5rem 1rem; font-size: 0.9rem;">
+              🚗 Get Directions
+            </a>
+          </div>
+
+          <div class="map-wrapper" style="margin-top: 1rem; border-radius: 12px; overflow: hidden; border: 1px solid rgba(242, 213, 116, 0.18);">
+            <iframe
+              src="https://maps.google.com/maps?q=Sengunthar%20Arulmigu%20Kumaraguru%20Subramaniyaswamy%20Temple,%20Ammapet,%20Salem&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              width="100%" height="240" style="border: 0; display: block;" allowfullscreen="" loading="lazy"
+              title="Wedding Venue Location — Sengunthar Arulmigu Kumaraguru Subramaniyaswamy Temple, Salem"></iframe>
           </div>
         </div>
       </div>

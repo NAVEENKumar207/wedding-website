@@ -2669,6 +2669,38 @@ input[type="text"],
 	.scratch-card-container {
 		margin: 1rem auto;
 	}
+
+/* ── Temple card premium design ── */
+.wedding-temple-card {
+	border: 2px solid #d8b65a !important; /* Gold/Saffron border */
+	background: linear-gradient(135deg, rgba(255, 253, 247, 0.96) 0%, rgba(253, 245, 230, 0.98) 100%) !important;
+	position: relative;
+	overflow: hidden;
+}
+
+.wedding-temple-card:hover {
+	border-color: #ff9933 !important;
+	box-shadow: 0 28px 65px rgba(230, 110, 30, 0.16), 0 0 35px rgba(255, 153, 51, 0.25) !important;
+}
+
+.temple-toran {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 15px;
+	z-index: 10;
+	overflow: hidden;
+	opacity: 0.9;
+}
+
+.temple-gopuram-icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #c99a35; /* Ochre / gold */
+	margin: 0.5rem auto 1rem;
+	filter: drop-shadow(0 2px 4px rgba(130, 110, 80, 0.15));
 }
 
 /* ── Disable hover transformations on touch devices ── */
@@ -2685,6 +2717,11 @@ input[type="text"],
 	.venue-map-card:hover,
 	.flames-card:hover {
 		transform: none !important;
+	}
+
+	.wedding-temple-card:hover {
+		border-color: #d8b65a !important;
+		box-shadow: var(--shadow-strong) !important;
 	}
 
 	.couple-photo-frame-new:hover .couple-photo-new {
