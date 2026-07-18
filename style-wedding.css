@@ -2672,63 +2672,92 @@ input[type="text"],
 	width: 100%;
 	max-width: 450px;
 	min-height: 680px;
-	padding: 3rem 2rem 2.5rem;
+	padding: 3.5rem 2.2rem 2.5rem;
 	border-radius: 24px;
-	box-shadow: var(--shadow-strong), 0 15px 45px rgba(0,0,0,0.12);
+	box-shadow: var(--shadow-strong), 0 15px 45px rgba(0,0,0,0.08);
 	position: relative;
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	text-align: center;
-	border: 3px solid rgba(255, 255, 255, 0.45);
+	border: 2px solid #b89030;
 	transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 	color: #2e2618;
 }
 
+.invitation-card::after {
+	content: '';
+	position: absolute;
+	inset: 8px;
+	border: 1px solid rgba(184, 144, 48, 0.35);
+	pointer-events: none;
+	border-radius: 18px;
+	z-index: 1;
+}
+
 .invitation-card:hover {
 	transform: translateY(-8px);
-	box-shadow: 0 35px 80px rgba(80, 60, 30, 0.2), 0 15px 40px rgba(0,0,0,0.15);
+	box-shadow: 0 35px 80px rgba(80, 60, 30, 0.15), 0 15px 40px rgba(0,0,0,0.1);
 }
 
 /* Reception Card Specific */
 .reception-card-box {
-	background: url('images/reception_bg.png') no-repeat center center / cover !important;
+	background: linear-gradient(135deg, #fdf8f5 0%, #f5ece9 100%) !important;
 }
 
 /* Wedding Card Specific */
 .wedding-card-box {
-	background: url('images/wedding_bg.png') no-repeat center center / cover !important;
-	border-color: rgba(216, 182, 90, 0.6);
+	background: linear-gradient(135deg, #fdfaf2 0%, #f7ecd8 100%) !important;
+	border-color: #d8b65a;
+}
+
+/* Corner Ornaments */
+.invitation-card .corner-ornament {
+	position: absolute;
+	width: 24px;
+	height: 24px;
+	color: #b89030;
+	pointer-events: none;
+	opacity: 0.8;
+	z-index: 2;
+}
+
+.invitation-card .corner-tl { top: 12px; left: 12px; }
+.invitation-card .corner-tr { top: 12px; right: 12px; transform: scaleX(-1); }
+.invitation-card .corner-bl { bottom: 12px; left: 12px; transform: scaleY(-1); }
+.invitation-card .corner-br { bottom: 12px; right: 12px; transform: scale(-1); }
+
+/* Centerpiece Top Icons */
+.card-top-icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0.5rem auto 1rem;
+	filter: drop-shadow(0 2px 4px rgba(130, 110, 80, 0.1));
+	z-index: 2;
+}
+
+/* Garland Torans */
+.temple-toran {
+	position: absolute;
+	top: 8px;
+	left: 8px;
+	right: 8px;
+	height: 15px;
+	z-index: 10;
+	overflow: hidden;
+	opacity: 0.9;
 }
 
 /* Invitation Card Typography */
-.invitation-card .card-invite-label {
-	font-family: 'Montserrat', sans-serif;
-	font-size: 1.05rem;
-	font-weight: 600;
-	letter-spacing: 0.12em;
-	text-transform: uppercase;
-	color: #4a3e2e;
-	margin-bottom: 0.2rem;
-	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
-}
-
-.invitation-card .card-invite-sub {
-	font-family: 'Cormorant Garamond', serif;
-	font-size: 1.25rem;
-	font-style: italic;
-	color: #71624a;
-	margin-bottom: 0.8rem;
-	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
-}
-
 .invitation-card .card-main-title {
 	font-family: 'Great Vibes', cursive;
-	font-size: clamp(3.2rem, 8vw, 4.2rem);
+	font-size: clamp(3.2rem, 8vw, 4rem);
 	line-height: 1.1;
-	margin: 0 0 1rem;
+	margin: 0.8rem 0 1rem;
 	font-weight: 400;
+	z-index: 2;
 }
 
 .reception-card-box .card-main-title {
@@ -2745,8 +2774,9 @@ input[type="text"],
 	font-family: 'Cormorant Garamond', serif;
 	font-size: 1.25rem;
 	font-style: italic;
-	margin: 0.6rem 0;
+	margin: 0.4rem 0;
 	color: #5a4e3e;
+	z-index: 2;
 }
 
 .invitation-card .card-date-tag {
@@ -2757,6 +2787,7 @@ input[type="text"],
 	color: #2e2618;
 	margin: 0.4rem 0;
 	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
+	z-index: 2;
 }
 
 .invitation-card .card-time-tag {
@@ -2766,10 +2797,11 @@ input[type="text"],
 	color: #b89030;
 	margin: 0.4rem 0 1.2rem;
 	text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
+	z-index: 2;
 }
 
 .wedding-card-box .card-time-tag {
-	color: #925807; /* Brighter gold/brown on orange */
+	color: #925807; /* Brighter gold/brown */
 }
 
 .invitation-card .card-venue-section {
@@ -2777,6 +2809,7 @@ input[type="text"],
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	z-index: 2;
 }
 
 .invitation-card .card-venue-label {
