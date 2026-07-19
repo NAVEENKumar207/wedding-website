@@ -96,17 +96,35 @@
       <div class="scratch-card-container" id="scratchCardContainer">
         <div class="scratch-card-frame">
           <div class="scratch-card" id="scratchCard">
-            <canvas id="scratchCanvas" width="320" height="200"></canvas>
+            <canvas id="scratchCanvas" width="500" height="300"></canvas>
             <div class="scratch-card-reveal" id="scratchReveal">
               <span class="scratch-reveal-icon">♥</span>
               <p class="scratch-date" data-translate="scratchDate">30 Aug 2026</p>
-              <p class="scratch-time" data-translate="scratchTime">Wedding · 8:00 AM Onwards</p>
+              <!-- Dynamic Marriage Countdown -->
+              <div class="scratch-countdown-container" id="scratchCountdown">
+                <div class="countdown-item">
+                  <span class="countdown-num" id="cdDays">00</span>
+                  <span class="countdown-label" data-translate="countdownDays">Days</span>
+                </div>
+                <div class="countdown-item">
+                  <span class="countdown-num" id="cdHours">00</span>
+                  <span class="countdown-label" data-translate="countdownHours">Hours</span>
+                </div>
+                <div class="countdown-item">
+                  <span class="countdown-num" id="cdMins">00</span>
+                  <span class="countdown-label" data-translate="countdownMins">Mins</span>
+                </div>
+                <div class="countdown-item">
+                  <span class="countdown-num" id="cdSecs">00</span>
+                  <span class="countdown-label" data-translate="countdownSecs">Secs</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <p class="hero-pre" id="heroQuote" data-translate="heroQuote">
+      <p class="hero-quote-style" id="heroQuote" data-translate="heroQuote">
         "In all the world, there is no heart for me like yours.<br />In all the world, there is no love for you like
         mine."
       </p>
@@ -142,18 +160,125 @@
       <div class="venue-schedule-grid" id="venueScheduleGrid">
         <!-- Reception Card -->
         <div class="invitation-card reception-card-box" id="receptionScheduleCard">
-          <!-- Corner Ornaments -->
-          <div class="corner-ornament corner-tl">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M0 12 L0 0 L12 0 M4 12 L4 4 L12 4"/><circle cx="7" cy="7" r="1" fill="currentColor"/></svg>
-          </div>
-          <div class="corner-ornament corner-tr">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M0 12 L0 0 L12 0 M4 12 L4 4 L12 4"/><circle cx="7" cy="7" r="1" fill="currentColor"/></svg>
-          </div>
-          <div class="corner-ornament corner-bl">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M0 12 L0 0 L12 0 M4 12 L4 4 L12 4"/><circle cx="7" cy="7" r="1" fill="currentColor"/></svg>
-          </div>
-          <div class="corner-ornament corner-br">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M0 12 L0 0 L12 0 M4 12 L4 4 L12 4"/><circle cx="7" cy="7" r="1" fill="currentColor"/></svg>
+          <div class="card-shine" aria-hidden="true"></div>
+          <span class="card-sparkle" aria-hidden="true"></span>
+          <span class="card-sparkle" aria-hidden="true"></span>
+          <span class="card-sparkle" aria-hidden="true"></span>
+          <span class="card-sparkle" aria-hidden="true"></span>
+          <span class="card-sparkle" aria-hidden="true"></span>
+          <span class="card-sparkle" aria-hidden="true"></span>
+
+          <!-- Floating Rose Petals -->
+          <svg class="petal" viewBox="0 0 24 24" aria-hidden="true"><path d="M12,2 C18,8 18,14 12,20 C6,14 6,8 12,2 Z"/></svg>
+          <svg class="petal" viewBox="0 0 24 24" aria-hidden="true"><path d="M12,2 C18,8 18,14 12,20 C6,14 6,8 12,2 Z"/></svg>
+          <svg class="petal" viewBox="0 0 24 24" aria-hidden="true"><path d="M12,2 C18,8 18,14 12,20 C6,14 6,8 12,2 Z"/></svg>
+          <svg class="petal" viewBox="0 0 24 24" aria-hidden="true"><path d="M12,2 C18,8 18,14 12,20 C6,14 6,8 12,2 Z"/></svg>
+          <svg class="petal" viewBox="0 0 24 24" aria-hidden="true"><path d="M12,2 C18,8 18,14 12,20 C6,14 6,8 12,2 Z"/></svg>
+
+          <!-- Vector Ornate Frame (Image 2 style) -->
+          <div class="reception-decorations" aria-hidden="true">
+            <!-- Left Pillar & Dome -->
+            <svg class="reception-pillar left" viewBox="0 0 50 700" preserveAspectRatio="none">
+              <rect x="5" y="650" width="40" height="20" rx="3" fill="#fcf3ee" stroke="#b57a80" stroke-width="1.2" />
+              <path d="M10,650 L40,650 L35,620 L15,620 Z" fill="#fae2dc" stroke="#b57a80" stroke-width="1.2" />
+              <rect x="18" y="80" width="14" height="540" fill="#ffffff" stroke="#b57a80" stroke-width="1.2" />
+              <line x1="22" y1="90" x2="22" y2="610" stroke="#b57a80" stroke-width="0.8" stroke-dasharray="1,4" />
+              <line x1="28" y1="90" x2="28" y2="610" stroke="#b57a80" stroke-width="0.8" stroke-dasharray="1,4" />
+              <path d="M12,80 L38,80 L35,50 L15,50 Z" fill="#fae2dc" stroke="#b57a80" stroke-width="1.2" />
+              <rect x="8" y="40" width="34" height="10" rx="2" fill="#fcf3ee" stroke="#b57a80" stroke-width="1.2" />
+              <path d="M5,620 L45,620 M12,620 L12,570 M38,570 L38,620 M18,620 L18,570 M32,570 L32,620" stroke="#b57a80" stroke-width="1" />
+              <path d="M10,570 L40,570 C40,540 10,540 10,570 Z" fill="#fdf3ee" stroke="#b57a80" stroke-width="1.2" />
+              <path d="M25,540 L25,528" stroke="#b57a80" stroke-width="1.2" />
+              <circle cx="25" cy="526" r="2.5" fill="#e5939a" stroke="#b57a80" stroke-width="0.8" />
+            </svg>
+            <!-- Right Pillar & Dome -->
+            <svg class="reception-pillar right" viewBox="0 0 50 700" preserveAspectRatio="none">
+              <rect x="5" y="650" width="40" height="20" rx="3" fill="#fcf3ee" stroke="#b57a80" stroke-width="1.2" />
+              <path d="M10,650 L40,650 L35,620 L15,620 Z" fill="#fae2dc" stroke="#b57a80" stroke-width="1.2" />
+              <rect x="18" y="80" width="14" height="540" fill="#ffffff" stroke="#b57a80" stroke-width="1.2" />
+              <line x1="22" y1="90" x2="22" y2="610" stroke="#b57a80" stroke-width="0.8" stroke-dasharray="1,4" />
+              <line x1="28" y1="90" x2="28" y2="610" stroke="#b57a80" stroke-width="0.8" stroke-dasharray="1,4" />
+              <path d="M12,80 L38,80 L35,50 L15,50 Z" fill="#fae2dc" stroke="#b57a80" stroke-width="1.2" />
+              <rect x="8" y="40" width="34" height="10" rx="2" fill="#fcf3ee" stroke="#b57a80" stroke-width="1.2" />
+              <path d="M5,620 L45,620 M12,620 L12,570 M38,570 L38,620 M18,620 L18,570 M32,570 L32,620" stroke="#b57a80" stroke-width="1" />
+              <path d="M10,570 L40,570 C40,540 10,540 10,570 Z" fill="#fdf3ee" stroke="#b57a80" stroke-width="1.2" />
+              <path d="M25,540 L25,528" stroke="#b57a80" stroke-width="1.2" />
+              <circle cx="25" cy="526" r="2.5" fill="#e5939a" stroke="#b57a80" stroke-width="0.8" />
+            </svg>
+            <!-- Top Arch -->
+            <svg class="reception-arch" viewBox="0 0 400 120" preserveAspectRatio="none">
+              <path d="M 0,120 C 0,70 30,45 80,45 C 100,45 125,35 145,35 C 165,35 180,22 200,22 C 220,22 235,35 255,35 C 275,35 300,45 320,45 C 370,45 400,70 400,120" fill="none" stroke="#b57a80" stroke-width="1.8" />
+              <path d="M 12,120 C 12,78 40,55 83,55 C 102,55 125,45 145,45 C 165,45 180,32 200,32 C 220,32 235,45 255,45 C 275,45 298,55 317,55 C 360,55 388,78 388,120" fill="none" stroke="#b57a80" stroke-width="1" stroke-dasharray="2,3" />
+              <path d="M 24,120 C 35,95 65,70 95,70 C 115,70 135,60 155,60 C 175,60 185,50 200,50 C 215,50 225,60 245,60 C 265,60 285,70 305,70 C 335,70 365,95 376,120" fill="none" stroke="#b57a80" stroke-width="0.8" stroke-opacity="0.6" />
+            </svg>
+            <!-- Hanging Garland Strings -->
+            <div class="reception-garland-strings">
+              <svg class="garland-string string-1" viewBox="0 0 10 180" preserveAspectRatio="none">
+                <line x1="5" y1="0" x2="5" y2="160" stroke="#b57a80" stroke-width="0.8" stroke-dasharray="2,4" />
+                <circle cx="5" cy="30" r="2.5" fill="#e91e63" />
+                <circle cx="5" cy="60" r="2.2" fill="#ffa726" />
+                <circle cx="5" cy="90" r="2.5" fill="#e91e63" />
+                <circle cx="5" cy="120" r="2.2" fill="#ffa726" />
+                <circle cx="5" cy="150" r="2.5" fill="#e91e63" />
+                <path d="M3,160 L7,160 L5,178 Z" fill="#e91e63" />
+                <circle cx="5" cy="160" r="1.5" fill="#ffa726" />
+              </svg>
+              <svg class="garland-string string-2" viewBox="0 0 10 150" preserveAspectRatio="none">
+                <line x1="5" y1="0" x2="5" y2="130" stroke="#b57a80" stroke-width="0.8" stroke-dasharray="2,4" />
+                <circle cx="5" cy="25" r="2.5" fill="#e91e63" />
+                <circle cx="5" cy="55" r="2.2" fill="#ffa726" />
+                <circle cx="5" cy="85" r="2.5" fill="#e91e63" />
+                <circle cx="5" cy="115" r="2.2" fill="#ffa726" />
+                <path d="M3,130 L7,130 L5,148 Z" fill="#e91e63" />
+                <circle cx="5" cy="130" r="1.5" fill="#ffa726" />
+              </svg>
+              <svg class="garland-string string-3" viewBox="0 0 10 120" preserveAspectRatio="none">
+                <line x1="5" y1="0" x2="5" y2="100" stroke="#b57a80" stroke-width="0.8" stroke-dasharray="2,4" />
+                <circle cx="5" cy="20" r="2.5" fill="#ffa726" />
+                <circle cx="5" cy="50" r="2.2" fill="#e91e63" />
+                <circle cx="5" cy="80" r="2.5" fill="#ffa726" />
+                <path d="M3,100 L7,100 L5,118 Z" fill="#e91e63" />
+                <circle cx="5" cy="100" r="1.5" fill="#ffa726" />
+              </svg>
+              <svg class="garland-string string-4" viewBox="0 0 10 120" preserveAspectRatio="none">
+                <line x1="5" y1="0" x2="5" y2="100" stroke="#b57a80" stroke-width="0.8" stroke-dasharray="2,4" />
+                <circle cx="5" cy="20" r="2.5" fill="#ffa726" />
+                <circle cx="5" cy="50" r="2.2" fill="#e91e63" />
+                <circle cx="5" cy="80" r="2.5" fill="#ffa726" />
+                <path d="M3,100 L7,100 L5,118 Z" fill="#e91e63" />
+                <circle cx="5" cy="100" r="1.5" fill="#ffa726" />
+              </svg>
+              <svg class="garland-string string-5" viewBox="0 0 10 150" preserveAspectRatio="none">
+                <line x1="5" y1="0" x2="5" y2="130" stroke="#b57a80" stroke-width="0.8" stroke-dasharray="2,4" />
+                <circle cx="5" cy="25" r="2.5" fill="#e91e63" />
+                <circle cx="5" cy="55" r="2.2" fill="#ffa726" />
+                <circle cx="5" cy="85" r="2.5" fill="#e91e63" />
+                <circle cx="5" cy="115" r="2.2" fill="#ffa726" />
+                <path d="M3,130 L7,130 L5,148 Z" fill="#e91e63" />
+                <circle cx="5" cy="130" r="1.5" fill="#ffa726" />
+              </svg>
+              <svg class="garland-string string-6" viewBox="0 0 10 180" preserveAspectRatio="none">
+                <line x1="5" y1="0" x2="5" y2="160" stroke="#b57a80" stroke-width="0.8" stroke-dasharray="2,4" />
+                <circle cx="5" cy="30" r="2.5" fill="#e91e63" />
+                <circle cx="5" cy="60" r="2.2" fill="#ffa726" />
+                <circle cx="5" cy="90" r="2.5" fill="#e91e63" />
+                <circle cx="5" cy="120" r="2.2" fill="#ffa726" />
+                <circle cx="5" cy="150" r="2.5" fill="#e91e63" />
+                <path d="M3,160 L7,160 L5,178 Z" fill="#e91e63" />
+                <circle cx="5" cy="160" r="1.5" fill="#ffa726" />
+              </svg>
+            </div>
+            <!-- Bottom Leaves -->
+            <svg class="reception-leaves left-leaves" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <path d="M 0,100 C 10,70 30,50 65,40 C 50,75 25,90 0,100 Z" fill="#81c784" stroke="#2e7d32" stroke-width="0.8" />
+              <path d="M 0,100 C 20,80 40,70 65,40" stroke="#2e7d32" stroke-width="1" />
+              <path d="M 0,100 C 25,85 55,85 85,85 C 60,95 30,100 0,100 Z" fill="#a5d6a7" stroke="#2e7d32" stroke-width="0.8" />
+            </svg>
+            <svg class="reception-leaves right-leaves" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <path d="M 100,100 C 90,70 70,50 35,40 C 50,75 75,90 100,100 Z" fill="#81c784" stroke="#2e7d32" stroke-width="0.8" />
+              <path d="M 100,100 C 80,80 60,70 35,40" stroke="#2e7d32" stroke-width="1" />
+              <path d="M 100,100 C 75,85 45,85 15,85 C 40,95 70,100 100,100 Z" fill="#a5d6a7" stroke="#2e7d32" stroke-width="0.8" />
+            </svg>
           </div>
 
           <!-- Garland Toran -->
@@ -211,6 +336,11 @@
           </div>
 
           <h3 class="card-main-title" data-translate="receptionMainTitle">Reception</h3>
+          <div class="card-title-divider" aria-hidden="true">
+            <span class="card-title-divider-line"></span>
+            <span class="card-title-divider-icon">♥</span>
+            <span class="card-title-divider-line"></span>
+          </div>
           
           <div class="card-connector" data-translate="cardOn">on</div>
           <p class="card-date-tag" data-translate="receptionTimeDate">Saturday, August 29th, 2026</p>
@@ -247,18 +377,112 @@
 
         <!-- Wedding Card -->
         <div class="invitation-card wedding-card-box" id="weddingScheduleCard">
-          <!-- Corner Ornaments -->
-          <div class="corner-ornament corner-tl">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M0 12 L0 0 L12 0 M4 12 L4 4 L12 4"/><circle cx="7" cy="7" r="1" fill="currentColor"/></svg>
-          </div>
-          <div class="corner-ornament corner-tr">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M0 12 L0 0 L12 0 M4 12 L4 4 L12 4"/><circle cx="7" cy="7" r="1" fill="currentColor"/></svg>
-          </div>
-          <div class="corner-ornament corner-bl">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M0 12 L0 0 L12 0 M4 12 L4 4 L12 4"/><circle cx="7" cy="7" r="1" fill="currentColor"/></svg>
-          </div>
-          <div class="corner-ornament corner-br">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M0 12 L0 0 L12 0 M4 12 L4 4 L12 4"/><circle cx="7" cy="7" r="1" fill="currentColor"/></svg>
+          <div class="card-shine" aria-hidden="true"></div>
+          <span class="card-sparkle" aria-hidden="true"></span>
+          <span class="card-sparkle" aria-hidden="true"></span>
+          <span class="card-sparkle" aria-hidden="true"></span>
+          <span class="card-sparkle" aria-hidden="true"></span>
+          <span class="card-sparkle" aria-hidden="true"></span>
+          <span class="card-sparkle" aria-hidden="true"></span>
+
+          <!-- Floating Marigold Petals -->
+          <svg class="petal" viewBox="0 0 24 24" aria-hidden="true"><path d="M12,2 C18,8 18,14 12,20 C6,14 6,8 12,2 Z"/></svg>
+          <svg class="petal" viewBox="0 0 24 24" aria-hidden="true"><path d="M12,2 C18,8 18,14 12,20 C6,14 6,8 12,2 Z"/></svg>
+          <svg class="petal" viewBox="0 0 24 24" aria-hidden="true"><path d="M12,2 C18,8 18,14 12,20 C6,14 6,8 12,2 Z"/></svg>
+          <svg class="petal" viewBox="0 0 24 24" aria-hidden="true"><path d="M12,2 C18,8 18,14 12,20 C6,14 6,8 12,2 Z"/></svg>
+          <svg class="petal" viewBox="0 0 24 24" aria-hidden="true"><path d="M12,2 C18,8 18,14 12,20 C6,14 6,8 12,2 Z"/></svg>
+
+          <!-- Vector Ornate Frame (Image 1 style) -->
+          <div class="wedding-decorations" aria-hidden="true">
+            <!-- Gopuram Watermark Background -->
+            <svg class="wedding-gopuram-watermark" viewBox="0 0 200 360" preserveAspectRatio="none">
+              <path d="M20,350 L180,350 L170,300 L30,300 Z" fill="none" stroke="#dcb35c" stroke-width="1.2" stroke-opacity="0.12" />
+              <path d="M40,300 L160,300 L152,250 L48,250 Z" fill="none" stroke="#dcb35c" stroke-width="1.2" stroke-opacity="0.12" />
+              <path d="M52,250 L148,250 L142,200 L58,200 Z" fill="none" stroke="#dcb35c" stroke-width="1.2" stroke-opacity="0.12" />
+              <path d="M62,200 L138,200 L133,150 L67,150 Z" fill="none" stroke="#dcb35c" stroke-width="1.2" stroke-opacity="0.12" />
+              <path d="M70,150 L130,150 L126,100 L74,100 Z" fill="none" stroke="#dcb35c" stroke-width="1.2" stroke-opacity="0.12" />
+              <path d="M76,100 L124,100 L120,50 L80,50 Z" fill="none" stroke="#dcb35c" stroke-width="1.2" stroke-opacity="0.12" />
+              <path d="M80,50 L120,50 Q100,20 80,50 Z" fill="none" stroke="#dcb35c" stroke-width="1.2" stroke-opacity="0.12" />
+              <line x1="100" y1="20" x2="100" y2="5" stroke="#dcb35c" stroke-width="1.2" stroke-opacity="0.12" />
+              <circle cx="100" cy="5" r="2.5" fill="none" stroke="#dcb35c" stroke-width="1.2" stroke-opacity="0.12" />
+              <rect x="85" y="315" width="30" height="35" fill="none" stroke="#dcb35c" stroke-width="1" stroke-opacity="0.12" />
+              <line x1="25" y1="325" x2="175" y2="325" stroke="#dcb35c" stroke-width="0.8" stroke-dasharray="2,2" stroke-opacity="0.12" />
+              <line x1="44" y1="275" x2="156" y2="275" stroke="#dcb35c" stroke-width="0.8" stroke-dasharray="2,2" stroke-opacity="0.12" />
+              <line x1="55" y1="225" x2="145" y2="225" stroke="#dcb35c" stroke-width="0.8" stroke-dasharray="2,2" stroke-opacity="0.12" />
+              <line x1="65" y1="175" x2="135" y2="175" stroke="#dcb35c" stroke-width="0.8" stroke-dasharray="2,2" stroke-opacity="0.12" />
+              <line x1="73" y1="125" x2="127" y2="125" stroke="#dcb35c" stroke-width="0.8" stroke-dasharray="2,2" stroke-opacity="0.12" />
+              <line x1="78" y1="75" x2="122" y2="75" stroke="#dcb35c" stroke-width="0.8" stroke-dasharray="2,2" stroke-opacity="0.12" />
+            </svg>
+            <!-- Hanging Brass Diyas (Lamps) -->
+            <div class="wedding-hanging-diyas">
+              <!-- Left Diya 1 (long) -->
+              <svg class="hanging-diya diya-left-1" viewBox="0 0 40 300" preserveAspectRatio="none">
+                <line x1="20" y1="0" x2="20" y2="220" stroke="#b89030" stroke-width="1" />
+                <line x1="20" y1="10" x2="20" y2="210" stroke="#dcb35c" stroke-width="1.8" stroke-dasharray="1,6" />
+                <path d="M10,225 C10,245 30,245 30,225 Z" fill="#dcb35c" stroke="#b89030" stroke-width="1.2" />
+                <path d="M6,225 L34,225 L30,220 L10,220 Z" fill="#b89030" />
+                <path d="M20,202 Q23,212 20,220 Q17,212 20,202 Z" fill="#ffa726" class="diya-flame" />
+                <path d="M20,207 Q21,213 20,220 Q19,213 20,207 Z" fill="#ffeb3b" class="diya-flame" />
+                <circle cx="20" cy="245" r="2" fill="#b89030" />
+                <line x1="20" y1="247" x2="20" y2="265" stroke="#b89030" stroke-width="1" />
+                <path d="M18,265 L22,265 L20,277 Z" fill="#dcb35c" />
+              </svg>
+              <!-- Left Diya 2 (short) -->
+              <svg class="hanging-diya diya-left-2" viewBox="0 0 40 300" preserveAspectRatio="none">
+                <line x1="20" y1="0" x2="20" y2="140" stroke="#b89030" stroke-width="1" />
+                <line x1="20" y1="10" x2="20" y2="130" stroke="#dcb35c" stroke-width="1.8" stroke-dasharray="1,6" />
+                <path d="M10,145 C10,165 30,165 30,145 Z" fill="#dcb35c" stroke="#b89030" stroke-width="1.2" />
+                <path d="M6,145 L34,145 L30,140 L10,140 Z" fill="#b89030" />
+                <path d="M20,122 Q23,132 20,140 Q17,132 20,122 Z" fill="#ffa726" class="diya-flame" />
+                <path d="M20,127 Q21,133 20,140 Q19,133 20,127 Z" fill="#ffeb3b" class="diya-flame" />
+                <circle cx="20" cy="165" r="2" fill="#b89030" />
+                <line x1="20" y1="167" x2="20" y2="185" stroke="#b89030" stroke-width="1" />
+                <path d="M18,185 L22,185 L20,197 Z" fill="#dcb35c" />
+              </svg>
+              <!-- Right Diya 1 (long) -->
+              <svg class="hanging-diya diya-right-1" viewBox="0 0 40 300" preserveAspectRatio="none">
+                <line x1="20" y1="0" x2="20" y2="220" stroke="#b89030" stroke-width="1" />
+                <line x1="20" y1="10" x2="20" y2="210" stroke="#dcb35c" stroke-width="1.8" stroke-dasharray="1,6" />
+                <path d="M10,225 C10,245 30,245 30,225 Z" fill="#dcb35c" stroke="#b89030" stroke-width="1.2" />
+                <path d="M6,225 L34,225 L30,220 L10,220 Z" fill="#b89030" />
+                <path d="M20,202 Q23,212 20,220 Q17,212 20,202 Z" fill="#ffa726" class="diya-flame" />
+                <path d="M20,207 Q21,213 20,220 Q19,213 20,207 Z" fill="#ffeb3b" class="diya-flame" />
+                <circle cx="20" cy="245" r="2" fill="#b89030" />
+                <line x1="20" y1="247" x2="20" y2="265" stroke="#b89030" stroke-width="1" />
+                <path d="M18,265 L22,265 L20,277 Z" fill="#dcb35c" />
+              </svg>
+              <!-- Right Diya 2 (short) -->
+              <svg class="hanging-diya diya-right-2" viewBox="0 0 40 300" preserveAspectRatio="none">
+                <line x1="20" y1="0" x2="20" y2="140" stroke="#b89030" stroke-width="1" />
+                <line x1="20" y1="10" x2="20" y2="130" stroke="#dcb35c" stroke-width="1.8" stroke-dasharray="1,6" />
+                <path d="M10,145 C10,165 30,165 30,145 Z" fill="#dcb35c" stroke="#b89030" stroke-width="1.2" />
+                <path d="M6,145 L34,145 L30,140 L10,140 Z" fill="#b89030" />
+                <path d="M20,122 Q23,132 20,140 Q17,132 20,122 Z" fill="#ffa726" class="diya-flame" />
+                <path d="M20,127 Q21,133 20,140 Q19,133 20,127 Z" fill="#ffeb3b" class="diya-flame" />
+                <circle cx="20" cy="165" r="2" fill="#b89030" />
+                <line x1="20" y1="167" x2="20" y2="185" stroke="#b89030" stroke-width="1" />
+                <path d="M18,185 L22,185 L20,197 Z" fill="#dcb35c" />
+              </svg>
+            </div>
+            <!-- Bottom Corner Lotus Flowers -->
+            <svg class="corner-lotus left-lotus" viewBox="0 0 100 80" preserveAspectRatio="none">
+              <path d="M10,70 C30,50 60,60 80,75 C50,75 25,80 10,70 Z" fill="#2e7d32" opacity="0.7"/>
+              <path d="M50,75 C42,40 50,20 50,20 C50,20 58,40 50,75 Z" fill="#e91e63" stroke="#c2185b" stroke-width="0.8" />
+              <path d="M50,75 C30,45 35,30 35,30 C35,30 45,50 50,75 Z" fill="#d81b60" stroke="#c2185b" stroke-width="0.8" />
+              <path d="M50,75 C70,45 65,30 65,30 C65,30 55,50 50,75 Z" fill="#d81b60" stroke="#c2185b" stroke-width="0.8" />
+              <path d="M50,75 C20,55 20,40 20,40 C20,40 35,60 50,75 Z" fill="#e91e63" stroke="#c2185b" stroke-width="0.8" />
+              <path d="M50,75 C80,55 80,40 80,40 C80,40 65,60 50,75 Z" fill="#e91e63" stroke="#c2185b" stroke-width="0.8" />
+              <path d="M38,75 Q50,68 62,75 Q50,85 38,75 Z" fill="#2e7d32" />
+            </svg>
+            <svg class="corner-lotus right-lotus" viewBox="0 0 100 80" preserveAspectRatio="none">
+              <path d="M90,70 C70,50 40,60 20,75 C50,75 75,80 90,70 Z" fill="#2e7d32" opacity="0.7"/>
+              <path d="M50,75 C58,40 50,20 50,20 C50,20 42,40 50,75 Z" fill="#e91e63" stroke="#c2185b" stroke-width="0.8" />
+              <path d="M50,75 C70,45 65,30 65,30 C65,30 55,50 50,75 Z" fill="#d81b60" stroke="#c2185b" stroke-width="0.8" />
+              <path d="M50,75 C30,45 35,30 35,30 C35,30 45,50 50,75 Z" fill="#d81b60" stroke="#c2185b" stroke-width="0.8" />
+              <path d="M50,75 C80,55 80,40 80,40 C80,40 65,60 50,75 Z" fill="#e91e63" stroke="#c2185b" stroke-width="0.8" />
+              <path d="M50,75 C20,55 20,40 20,40 C20,40 35,60 50,75 Z" fill="#e91e63" stroke="#c2185b" stroke-width="0.8" />
+              <path d="M62,75 Q50,68 38,75 Q50,85 62,75 Z" fill="#2e7d32" />
+            </svg>
           </div>
 
           <!-- Traditional Toran / Garland -->
@@ -296,6 +520,11 @@
           </div>
 
           <h3 class="card-main-title" data-translate="weddingMainTitle">Wedding (Muhurtham)</h3>
+          <div class="card-title-divider" aria-hidden="true">
+            <span class="card-title-divider-line"></span>
+            <span class="card-title-divider-icon">♥</span>
+            <span class="card-title-divider-line"></span>
+          </div>
           
           <div class="card-connector" data-translate="cardOn">on</div>
           <p class="card-date-tag" data-translate="weddingTimeDate">Sunday, August 30th, 2026</p>

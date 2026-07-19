@@ -452,31 +452,62 @@ gsap.registerPlugin(ScrollTrigger);
     }
   });
 
-  gsap.fromTo('#receptionScheduleCard', {
-    x: -30, y: 30, opacity: 0
-  }, {
-    x: 0, y: 0, opacity: 1,
-    duration: 1.2,
-    ease: 'power4.out',
-    scrollTrigger: {
-      trigger: '#venueScheduleGrid',
-      start: 'top 80%',
-      toggleActions: 'play none none reverse',
-    }
-  });
+  function revealInvitationCard(cardSelector, fromX) {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: cardSelector,
+        start: 'top 78%',
+        toggleActions: 'play none none reverse',
+      }
+    });
 
-  gsap.fromTo('#weddingScheduleCard', {
-    x: 30, y: 30, opacity: 0
-  }, {
-    x: 0, y: 0, opacity: 1,
-    duration: 1.2,
-    ease: 'power4.out',
-    scrollTrigger: {
-      trigger: '#venueScheduleGrid',
-      start: 'top 80%',
-      toggleActions: 'play none none reverse',
-    }
-  });
+    tl.fromTo(cardSelector, {
+      x: fromX, y: 50, opacity: 0, rotateZ: fromX > 0 ? 3 : -3, scale: 0.94
+    }, {
+      x: 0, y: 0, opacity: 1, rotateZ: 0, scale: 1,
+      duration: 1.1, ease: 'power4.out'
+    })
+      .fromTo(`${cardSelector} .card-top-icon`, {
+        y: -24, opacity: 0, scale: 0.6
+      }, {
+        y: 0, opacity: 1, scale: 1, duration: 0.7, ease: 'back.out(2)'
+      }, '-=0.6')
+      .fromTo(`${cardSelector} .card-main-title`, {
+        y: 16, opacity: 0, scale: 0.92
+      }, {
+        y: 0, opacity: 1, scale: 1, duration: 0.7, ease: 'power3.out'
+      }, '-=0.25')
+      .fromTo(`${cardSelector} .card-title-divider-line`, {
+        scaleX: 0
+      }, {
+        scaleX: 1, duration: 0.6, ease: 'power2.out', transformOrigin: 'center'
+      }, '-=0.35')
+      .fromTo(`${cardSelector} .card-connector, ${cardSelector} .card-date-tag, ${cardSelector} .card-time-tag`, {
+        y: 12, opacity: 0
+      }, {
+        y: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: 'power2.out'
+      }, '-=0.2')
+      .fromTo(`${cardSelector} .card-venue-section`, {
+        y: 16, opacity: 0
+      }, {
+        y: 0, opacity: 1, duration: 0.6, ease: 'power2.out'
+      }, '-=0.15')
+      .fromTo(`${cardSelector} .card-actions`, {
+        y: 14, opacity: 0
+      }, {
+        y: 0, opacity: 1, duration: 0.5, ease: 'power2.out'
+      }, '-=0.2')
+      .fromTo(`${cardSelector} .card-map-wrapper`, {
+        y: 16, opacity: 0, scale: 0.96
+      }, {
+        y: 0, opacity: 1, scale: 1, duration: 0.6, ease: 'power2.out'
+      }, '-=0.2');
+
+    return tl;
+  }
+
+  revealInvitationCard('#receptionScheduleCard', -40);
+  revealInvitationCard('#weddingScheduleCard', 40);
 
 })();
 
@@ -1358,4 +1389,53 @@ function renderHeroNameLetters() {
       toggleActions: 'play none none reverse',
     }
   });
+})();
+
+// ══════════════════════════════════════════════════════════════════════════
+//      WEDDING COUNTDOWN TIMER
+// ══════════════════════════════════════════════════════════════════════════
+(function initWeddingCountdown() {
+  const targetDate = new Date('2026-08-30T08:00:00+05:30').getTime();
+
+  const daysEl = document.getElementById('cdDays');
+  const hoursEl = document.getElementById('cdHours');
+  const minsEl = document.getElementById('cdMins');
+  const secsEl = document.getElementById('cdSecs');
+
+  if (!daysEl || !hoursEl || !minsEl || !secsEl) return;
+
+  function updateNumWithAnimation(el, newValue) {
+    if (el.textContent !== newValue) {
+      el.textContent = newValue;
+      el.classList.remove('digit-pop');
+      void el.offsetWidth; // Trigger reflow
+      el.classList.add('digit-pop');
+    }
+  }
+
+  function updateTimer() {
+    const now = new Date().getTime();
+    const difference = targetDate - now;
+
+    if (difference <= 0) {
+      updateNumWithAnimation(daysEl, '00');
+      updateNumWithAnimation(hoursEl, '00');
+      updateNumWithAnimation(minsEl, '00');
+      secsEl.textContent = '00';
+      return;
+    }
+
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+    updateNumWithAnimation(daysEl, days.toString().padStart(2, '0'));
+    updateNumWithAnimation(hoursEl, hours.toString().padStart(2, '0'));
+    updateNumWithAnimation(minsEl, minutes.toString().padStart(2, '0'));
+    secsEl.textContent = seconds.toString().padStart(2, '0');
+  }
+
+  updateTimer();
+  setInterval(updateTimer, 1000);
 })();
