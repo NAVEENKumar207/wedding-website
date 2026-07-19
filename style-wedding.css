@@ -732,15 +732,34 @@ body.site-unlocked .entry-screen {
 	animation: floatLocket 4.5s ease-in-out infinite;
 }
 
-.countdown-item:nth-child(1) { animation-delay: 0s; }
-.countdown-item:nth-child(2) { animation-delay: 0.9s; }
-.countdown-item:nth-child(3) { animation-delay: 1.8s; }
-.countdown-item:nth-child(4) { animation-delay: 2.7s; }
+.countdown-item:nth-child(1) {
+	animation-delay: 0s;
+}
+
+.countdown-item:nth-child(2) {
+	animation-delay: 0.9s;
+}
+
+.countdown-item:nth-child(3) {
+	animation-delay: 1.8s;
+}
+
+.countdown-item:nth-child(4) {
+	animation-delay: 2.7s;
+}
 
 @keyframes floatLocket {
-	0% { transform: translateY(0); }
-	50% { transform: translateY(-4px); }
-	100% { transform: translateY(0); }
+	0% {
+		transform: translateY(0);
+	}
+
+	50% {
+		transform: translateY(-4px);
+	}
+
+	100% {
+		transform: translateY(0);
+	}
 }
 
 .countdown-item::after {
@@ -796,18 +815,8 @@ body.site-unlocked .entry-screen {
 	z-index: 1;
 }
 
-/* A quiet pulse on the seconds panel each tick */
-#cdSecs {
-	display: inline-block;
-	animation: countdownPulse 1s steps(1) infinite;
-}
-
-@keyframes countdownPulse {
-	0% { transform: scale(1); }
-	15% { transform: scale(1.12); }
-	30% { transform: scale(1); }
-	100% { transform: scale(1); }
-}
+/* Each digit now animates in perfect sync with the JS tick — including
+   seconds, which used to run its own decoupled, unsynced CSS loop. */
 
 .countdown-item:last-child {
 	border-color: rgba(184, 144, 48, 0.75);
@@ -826,15 +835,68 @@ body.site-unlocked .entry-screen {
 		0 0 18px rgba(240, 217, 138, 0.65);
 }
 
-/* Digit change animation */
+/* Digit change animation — a quick mechanical "flip" tick rather than a
+   flat scale bump, closer to a real flip-clock */
 @keyframes digitPop {
-	0% { transform: scale(1); text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6); }
-	50% { transform: scale(1.15); text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6), 0 0 8px rgba(184, 144, 48, 0.6); color: #b89030; }
-	100% { transform: scale(1); text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6); }
+	0% {
+		transform: perspective(200px) rotateX(0deg) translateY(0);
+		text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+		color: #7a4d0a;
+	}
+
+	35% {
+		transform: perspective(200px) rotateX(-50deg) translateY(-4px);
+		text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6), 0 0 10px rgba(184, 144, 48, 0.65);
+		color: #b89030;
+	}
+
+	65% {
+		transform: perspective(200px) rotateX(20deg) translateY(1px);
+	}
+
+	100% {
+		transform: perspective(200px) rotateX(0deg) translateY(0);
+		text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+		color: #7a4d0a;
+	}
+}
+
+.countdown-num {
+	display: inline-block;
+	transform-origin: 50% 65%;
 }
 
 .digit-pop {
-	animation: digitPop 0.35s ease-out;
+	animation: digitPop 0.45s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+/* A soft glowing ring around the seconds panel that breathes with each
+   flip, so the fastest-moving number reads as the "pulse" of the clock */
+.countdown-item:last-child {
+	animation: floatLocket 4.5s ease-in-out infinite, secsGlow 1s ease-in-out infinite;
+}
+
+@keyframes secsGlow {
+
+	0%,
+	100% {
+		box-shadow: 0 3px 12px rgba(130, 100, 20, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.9), inset 0 0 0 1px rgba(184, 144, 48, 0.2), 0 0 12px rgba(240, 217, 138, 0.4);
+	}
+
+	50% {
+		box-shadow: 0 3px 12px rgba(130, 100, 20, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.9), inset 0 0 0 1px rgba(184, 144, 48, 0.2), 0 0 20px rgba(240, 217, 138, 0.7);
+	}
+}
+
+/* Once the wedding date arrives, the panels settle into a warm, steady
+   gold glow instead of continuing to "tick" */
+.countdown-complete .countdown-item {
+	animation: none !important;
+	border-color: rgba(184, 144, 48, 0.95);
+	box-shadow:
+		0 8px 22px rgba(130, 100, 20, 0.22),
+		inset 0 1px 0 rgba(255, 255, 255, 0.9),
+		0 0 18px rgba(240, 217, 138, 0.55);
 }
 
 /* Hero Quote styling - elegant serif typography */
@@ -1506,7 +1568,8 @@ body.site-unlocked .entry-screen {
 	border-radius: 99px;
 	border: 1px solid var(--gold);
 	background: #ffffff;
-	color: #8c6b12; /* Darker gold for better contrast on white background */
+	color: #8c6b12;
+	/* Darker gold for better contrast on white background */
 	font-weight: 600;
 	font-size: 0.82rem;
 	letter-spacing: 0.08em;
@@ -1523,8 +1586,10 @@ body.site-unlocked .entry-screen {
 .directions-btn:hover,
 .calendar-btn:hover {
 	transform: translateY(-4px) scale(1.03);
-	background: #1a1410; /* Black/dark background */
-	color: #f3d994; /* Light gold text */
+	background: #1a1410;
+	/* Black/dark background */
+	color: #f3d994;
+	/* Light gold text */
 	border-color: #1a1410;
 	box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25);
 }
@@ -2399,6 +2464,299 @@ button:focus-visible {
 	.invitation-card:hover {
 		transform: translateY(-8px) !important;
 	}
+
+	.countdown-item,
+	.countdown-item:last-child,
+	.digit-pop {
+		animation: none !important;
+	}
+}
+
+/* ── Vector Ornate Card Decorations (Image 1 & 2 styles) ── */
+.reception-decorations,
+.wedding-decorations {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	overflow: hidden;
+	z-index: 1;
+}
+
+/* Make sure all text content sits above the decorations */
+.invitation-card .card-main-title,
+.invitation-card .card-title-divider,
+.invitation-card .card-connector,
+.invitation-card .card-date-tag,
+.invitation-card .card-time-tag,
+.invitation-card .card-venue-section,
+.invitation-card .card-actions,
+.invitation-card .card-map-wrapper {
+	position: relative;
+	z-index: 2;
+}
+
+/* Reception Card (Pink Arch) Frame — sized and positioned to sit inside
+   the card's own padding, framing the content like the pavilion-arch
+   reference, instead of overlapping the title / date / venue text. */
+.reception-arch {
+	position: absolute;
+	top: 4px;
+	left: 4px;
+	right: 4px;
+	width: calc(100% - 8px);
+	height: 92px;
+	z-index: 1;
+	opacity: 0.9;
+}
+
+.reception-pillar {
+	position: absolute;
+	top: 4px;
+	height: calc(100% - 8px);
+	width: 22px;
+	z-index: 1;
+	opacity: 0.9;
+}
+
+.reception-pillar.left {
+	left: 4px;
+}
+
+.reception-pillar.right {
+	right: 4px;
+}
+
+/* A slim gradient thread runs the full height of the card — being a
+   straight line, it stretches to any height with zero distortion. */
+.reception-pillar .pillar-line {
+	position: absolute;
+	left: 50%;
+	top: 10px;
+	bottom: 10px;
+	width: 2px;
+	transform: translateX(-50%);
+	background: linear-gradient(180deg, transparent, #b57a80 10%, #b57a80 90%, transparent);
+}
+
+/* Caps and flourishes stay a fixed pixel size no matter how tall the
+   pillar stretches, so they always render crisp — never warped. */
+.reception-pillar .pillar-cap {
+	position: absolute;
+	left: 50%;
+	width: 13px;
+	height: 13px;
+	transform: translateX(-50%);
+	border-radius: 50%;
+	background: radial-gradient(circle at 35% 30%, #fff 0%, #fae2dc 40%, #e5939a 85%);
+	border: 1px solid rgba(181, 122, 128, 0.55);
+	box-shadow: 0 1px 3px rgba(181, 122, 128, 0.3);
+	z-index: 1;
+}
+
+.pillar-cap-top {
+	top: 0;
+}
+
+.pillar-cap-bottom {
+	bottom: 0;
+}
+
+.reception-pillar .pillar-ornament {
+	position: absolute;
+	left: 50%;
+	width: 8px;
+	height: 8px;
+	transform: translate(-50%, -50%);
+	border-radius: 50%;
+	background: radial-gradient(circle, #ff8a9a 0%, #d81b60 100%);
+	box-shadow: 0 0 4px rgba(216, 27, 96, 0.4);
+	z-index: 1;
+}
+
+.reception-pillar .pillar-ornament::after {
+	content: '';
+	position: absolute;
+	inset: -3px;
+	border-radius: 50%;
+	border: 1px solid rgba(181, 122, 128, 0.4);
+}
+
+/* Hanging strands sit inside the arch's own crown, well clear of the
+   chandelier icon and title that follow in normal flow beneath it. */
+.reception-garland-strings {
+	position: absolute;
+	top: 14px;
+	left: 56px;
+	right: 56px;
+	height: 90px; /* Increased length to center & align */
+	display: flex;
+	justify-content: space-around;
+	z-index: 1;
+}
+
+.garland-string {
+	width: 8px;
+	height: 100%;
+	overflow: visible;
+	transform-origin: top center;
+	animation: stringSway 3.2s ease-in-out infinite alternate;
+}
+
+.garland-string.string-1 {
+	animation-delay: 0s;
+}
+
+.garland-string.string-2 {
+	animation-delay: 0.5s;
+	animation-duration: 3.8s;
+}
+
+.garland-string.string-3 {
+	animation-delay: 1.1s;
+	animation-duration: 2.8s;
+}
+
+.garland-string.string-4 {
+	animation-delay: 0.3s;
+	animation-duration: 3s;
+}
+
+.garland-string.string-5 {
+	animation-delay: 0.8s;
+	animation-duration: 3.5s;
+}
+
+.garland-string.string-6 {
+	animation-delay: 1.3s;
+	animation-duration: 3.1s;
+}
+
+@keyframes stringSway {
+	0% {
+		transform: rotate(-2.5deg);
+	}
+
+	100% {
+		transform: rotate(2.5deg);
+	}
+}
+
+.reception-leaves {
+	position: absolute;
+	bottom: 4px;
+	width: 56px;
+	height: 52px;
+	z-index: 1;
+	opacity: 0.9;
+}
+
+.left-leaves {
+	left: 4px;
+}
+
+.right-leaves {
+	right: 4px;
+}
+
+/* Wedding Card (Temple Gopuram) Frame */
+.wedding-gopuram-watermark {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: min(300px, 85%);
+	height: min(520px, 85%);
+	z-index: 0;
+	opacity: 0.65;
+}
+
+/* Diyas hang from the very top edge only, inside the card's header band,
+   so they never reach the icon / title that starts in normal flow below. */
+.wedding-hanging-diyas {
+	position: absolute;
+	top: 4px;
+	left: 38px;
+	right: 38px;
+	height: 140px; /* Increased length to make glowing lights stand out */
+	z-index: 1;
+}
+
+.hanging-diya {
+	position: absolute;
+	top: 0;
+	width: 18px;
+	height: 135px; /* Increased length of the light */
+	transform-origin: top center;
+	animation: diyaSway 4.2s ease-in-out infinite alternate;
+}
+
+.diya-left-1 {
+	left: 0;
+}
+
+.diya-left-2 {
+	left: 28px;
+	height: 95px; /* Increased length of the light */
+	animation-delay: 0.6s;
+	animation-duration: 3.5s;
+}
+
+.diya-right-1 {
+	right: 0;
+	animation-delay: 0.3s;
+	animation-duration: 4.5s;
+}
+
+.diya-right-2 {
+	right: 28px;
+	height: 95px; /* Increased length of the light */
+	animation-delay: 0.9s;
+	animation-duration: 3.8s;
+}
+
+@keyframes diyaSway {
+	0% {
+		transform: rotate(-1.5deg);
+	}
+
+	100% {
+		transform: rotate(1.5deg);
+	}
+}
+
+.diya-flame {
+	animation: flameFlicker 0.15s ease-in-out infinite alternate;
+	transform-origin: bottom center;
+}
+
+@keyframes flameFlicker {
+	0% {
+		transform: scale(0.95) rotate(-1deg);
+		opacity: 0.85;
+	}
+
+	100% {
+		transform: scale(1.05) rotate(1deg);
+		opacity: 1;
+	}
+}
+
+.corner-lotus {
+	position: absolute;
+	bottom: 4px;
+	width: 54px;
+	height: 44px;
+	z-index: 1;
+	opacity: 0.9;
+	filter: drop-shadow(0 2px 4px rgba(130, 80, 80, 0.12));
+}
+
+.left-lotus {
+	left: 4px;
+}
+
+.right-lotus {
+	right: 4px;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -2531,14 +2889,56 @@ input[type="text"],
 
 	/* Scale the ornamental card frames down with the card so nothing
 	   spills into the padding/text zone at tablet widths. */
-	.reception-arch { height: 78px; }
-	.reception-pillar { width: 18px; }
-	.reception-garland-strings { top: 12px; left: 46px; right: 46px; height: 38px; }
-	.reception-leaves { width: 46px; height: 42px; }
-	.wedding-hanging-diyas { left: 32px; right: 32px; height: 54px; }
-	.hanging-diya { width: 15px; height: 50px; }
-	.diya-left-2, .diya-right-2 { height: 35px; }
-	.corner-lotus { width: 44px; height: 36px; }
+	.reception-arch {
+		height: 78px;
+	}
+
+	.reception-pillar {
+		width: 18px;
+	}
+
+	.reception-pillar .pillar-cap {
+		width: 11px;
+		height: 11px;
+	}
+
+	.reception-pillar .pillar-ornament {
+		width: 7px;
+		height: 7px;
+	}
+
+	.reception-garland-strings {
+		top: 12px;
+		left: 46px;
+		right: 46px;
+		height: 38px;
+	}
+
+	.reception-leaves {
+		width: 46px;
+		height: 42px;
+	}
+
+	.wedding-hanging-diyas {
+		left: 32px;
+		right: 32px;
+		height: 110px;
+	}
+
+	.hanging-diya {
+		width: 15px;
+		height: 105px;
+	}
+
+	.diya-left-2,
+	.diya-right-2 {
+		height: 75px;
+	}
+
+	.corner-lotus {
+		width: 44px;
+		height: 36px;
+	}
 
 	.flames-card {
 		padding: 2.2rem 1.5rem;
@@ -2660,15 +3060,61 @@ input[type="text"],
 
 	/* Ornamental frames scaled to the narrow phone card so the arch,
 	   pillars, garlands and diyas read as a border, not clutter. */
-	.reception-arch { height: 64px; }
-	.reception-pillar { width: 14px; }
-	.reception-garland-strings { top: 10px; left: 34px; right: 34px; height: 30px; }
-	.reception-leaves { width: 38px; height: 34px; }
-	.wedding-hanging-diyas { left: 26px; right: 26px; height: 44px; }
-	.hanging-diya { width: 13px; height: 40px; }
-	.diya-left-2 { left: 20px; height: 28px; }
-	.diya-right-2 { right: 20px; height: 28px; }
-	.corner-lotus { width: 36px; height: 30px; }
+	.reception-arch {
+		height: 64px;
+	}
+
+	.reception-pillar {
+		width: 14px;
+	}
+
+	.reception-pillar .pillar-cap {
+		width: 9px;
+		height: 9px;
+	}
+
+	.reception-pillar .pillar-ornament {
+		width: 6px;
+		height: 6px;
+	}
+
+	.reception-garland-strings {
+		top: 10px;
+		left: 34px;
+		right: 34px;
+		height: 30px;
+	}
+
+	.reception-leaves {
+		width: 38px;
+		height: 34px;
+	}
+
+	.wedding-hanging-diyas {
+		left: 26px;
+		right: 26px;
+		height: 90px;
+	}
+
+	.hanging-diya {
+		width: 13px;
+		height: 85px;
+	}
+
+	.diya-left-2 {
+		left: 20px;
+		height: 60px;
+	}
+
+	.diya-right-2 {
+		right: 20px;
+		height: 60px;
+	}
+
+	.corner-lotus {
+		width: 36px;
+		height: 30px;
+	}
 
 	.invitation-card::after {
 		inset: 6px;
@@ -3063,10 +3509,28 @@ input[type="text"],
 	z-index: 2;
 }
 
-.invitation-card .corner-tl { top: 14px; left: 14px; }
-.invitation-card .corner-tr { top: 14px; right: 14px; transform: scaleX(-1); }
-.invitation-card .corner-bl { bottom: 14px; left: 14px; transform: scaleY(-1); }
-.invitation-card .corner-br { bottom: 14px; right: 14px; transform: scale(-1); }
+.invitation-card .corner-tl {
+	top: 14px;
+	left: 14px;
+}
+
+.invitation-card .corner-tr {
+	top: 14px;
+	right: 14px;
+	transform: scaleX(-1);
+}
+
+.invitation-card .corner-bl {
+	bottom: 14px;
+	left: 14px;
+	transform: scaleY(-1);
+}
+
+.invitation-card .corner-br {
+	bottom: 14px;
+	right: 14px;
+	transform: scale(-1);
+}
 
 /* Centerpiece Top Icons — set in a soft glowing halo, like candlelight */
 .card-top-icon {
@@ -3142,12 +3606,14 @@ input[type="text"],
 }
 
 .reception-card-box .card-main-title {
-	color: #7c1a2e; /* Crimson maroon */
+	color: #7c1a2e;
+	/* Crimson maroon */
 	text-shadow: 0 2px 10px rgba(232, 143, 163, 0.35), 0 2px 4px rgba(255, 255, 255, 0.7);
 }
 
 .wedding-card-box .card-main-title {
-	color: #6a1a08; /* Deep brown-red */
+	color: #6a1a08;
+	/* Deep brown-red */
 	text-shadow: 0 2px 10px rgba(255, 183, 94, 0.4), 0 2px 4px rgba(255, 255, 255, 0.7);
 }
 
@@ -3205,7 +3671,8 @@ input[type="text"],
 }
 
 .wedding-card-box .card-time-tag {
-	color: #925807; /* Brighter gold/brown */
+	color: #925807;
+	/* Brighter gold/brown */
 }
 
 .invitation-card .card-venue-section {
@@ -3255,7 +3722,8 @@ input[type="text"],
 	gap: 0.8rem;
 	justify-content: center;
 	flex-wrap: wrap;
-	margin-top: auto; /* Push actions and map wrapper to the bottom */
+	margin-top: auto;
+	/* Push actions and map wrapper to the bottom */
 	margin-bottom: 1.3rem;
 	width: 100%;
 	z-index: 5;
@@ -3267,7 +3735,7 @@ input[type="text"],
 	min-height: 40px;
 	padding: 0.5rem 1.2rem;
 	font-size: 0.85rem;
-	box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
 }
 
 /* Map wrapper inside invitation cards */
@@ -3277,7 +3745,7 @@ input[type="text"],
 	border-radius: 16px;
 	overflow: hidden;
 	border: 2px solid rgba(184, 144, 48, 0.4);
-	box-shadow: 0 8px 24px rgba(0,0,0,0.1), inset 0 0 0 4px rgba(255, 255, 255, 0.5);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1), inset 0 0 0 4px rgba(255, 255, 255, 0.5);
 	margin-top: 0;
 	z-index: 5;
 }
@@ -3314,8 +3782,15 @@ input[type="text"],
 }
 
 @keyframes cardIconFloat {
-	0%, 100% { transform: translateY(0) rotate(0deg); }
-	50% { transform: translateY(-4px) rotate(-2deg); }
+
+	0%,
+	100% {
+		transform: translateY(0) rotate(0deg);
+	}
+
+	50% {
+		transform: translateY(-4px) rotate(-2deg);
+	}
 }
 
 .card-top-icon svg {
@@ -3323,8 +3798,15 @@ input[type="text"],
 }
 
 @keyframes cardIconGlow {
-	0%, 100% { filter: drop-shadow(0 0 6px rgba(184, 144, 48, 0.32)); }
-	50% { filter: drop-shadow(0 0 15px rgba(184, 144, 48, 0.6)); }
+
+	0%,
+	100% {
+		filter: drop-shadow(0 0 6px rgba(184, 144, 48, 0.32));
+	}
+
+	50% {
+		filter: drop-shadow(0 0 15px rgba(184, 144, 48, 0.6));
+	}
 }
 
 /* Garland — the little flowers/bells twinkle like fairy lights */
@@ -3334,13 +3816,30 @@ input[type="text"],
 	transform-box: fill-box;
 }
 
-.temple-toran circle:nth-of-type(3n) { animation-delay: 0.35s; }
-.temple-toran circle:nth-of-type(3n+1) { animation-delay: 0.7s; }
-.temple-toran circle:nth-of-type(3n+2) { animation-delay: 1.05s; }
+.temple-toran circle:nth-of-type(3n) {
+	animation-delay: 0.35s;
+}
+
+.temple-toran circle:nth-of-type(3n+1) {
+	animation-delay: 0.7s;
+}
+
+.temple-toran circle:nth-of-type(3n+2) {
+	animation-delay: 1.05s;
+}
 
 @keyframes toranTwinkle {
-	0%, 100% { opacity: 1; transform: scale(1); }
-	50% { opacity: 0.45; transform: scale(0.85); }
+
+	0%,
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	50% {
+		opacity: 0.45;
+		transform: scale(0.85);
+	}
 }
 
 /* Corner ornaments — a slow confident pulse */
@@ -3348,13 +3847,28 @@ input[type="text"],
 	animation: cornerPulse 3.4s ease-in-out infinite;
 }
 
-.invitation-card .corner-tr { animation-delay: 0.3s; }
-.invitation-card .corner-bl { animation-delay: 0.6s; }
-.invitation-card .corner-br { animation-delay: 0.9s; }
+.invitation-card .corner-tr {
+	animation-delay: 0.3s;
+}
+
+.invitation-card .corner-bl {
+	animation-delay: 0.6s;
+}
+
+.invitation-card .corner-br {
+	animation-delay: 0.9s;
+}
 
 @keyframes cornerPulse {
-	0%, 100% { opacity: 0.55; }
-	50% { opacity: 1; }
+
+	0%,
+	100% {
+		opacity: 0.55;
+	}
+
+	50% {
+		opacity: 1;
+	}
 }
 
 /* Title divider — a thread of light travels along the line */
@@ -3364,8 +3878,13 @@ input[type="text"],
 }
 
 @keyframes dividerShimmer {
-	0% { background-position: 200% 0; }
-	100% { background-position: -200% 0; }
+	0% {
+		background-position: 200% 0;
+	}
+
+	100% {
+		background-position: -200% 0;
+	}
 }
 
 /* Foil shine — a soft diagonal light sweep crosses the card every few seconds */
@@ -3383,9 +3902,17 @@ input[type="text"],
 }
 
 @keyframes cardShineSweep {
-	0% { left: -160%; }
-	28% { left: 160%; }
-	100% { left: 160%; }
+	0% {
+		left: -160%;
+	}
+
+	28% {
+		left: 160%;
+	}
+
+	100% {
+		left: 160%;
+	}
 }
 
 /* Sparkle particles drifting gently inside the card */
@@ -3402,19 +3929,65 @@ input[type="text"],
 	animation: cardSparkleDrift 5s ease-in-out infinite;
 }
 
-.invitation-card .card-sparkle:nth-of-type(1) { top: 22%; left: 12%; animation-delay: 0s; }
-.invitation-card .card-sparkle:nth-of-type(2) { top: 38%; left: 85%; animation-delay: 0.9s; }
-.invitation-card .card-sparkle:nth-of-type(3) { top: 60%; left: 8%; animation-delay: 1.8s; }
-.invitation-card .card-sparkle:nth-of-type(4) { top: 15%; left: 70%; animation-delay: 2.6s; }
-.invitation-card .card-sparkle:nth-of-type(5) { top: 72%; left: 90%; animation-delay: 3.3s; }
-.invitation-card .card-sparkle:nth-of-type(6) { top: 48%; left: 50%; animation-delay: 4.1s; }
+.invitation-card .card-sparkle:nth-of-type(1) {
+	top: 22%;
+	left: 12%;
+	animation-delay: 0s;
+}
+
+.invitation-card .card-sparkle:nth-of-type(2) {
+	top: 38%;
+	left: 85%;
+	animation-delay: 0.9s;
+}
+
+.invitation-card .card-sparkle:nth-of-type(3) {
+	top: 60%;
+	left: 8%;
+	animation-delay: 1.8s;
+}
+
+.invitation-card .card-sparkle:nth-of-type(4) {
+	top: 15%;
+	left: 70%;
+	animation-delay: 2.6s;
+}
+
+.invitation-card .card-sparkle:nth-of-type(5) {
+	top: 72%;
+	left: 90%;
+	animation-delay: 3.3s;
+}
+
+.invitation-card .card-sparkle:nth-of-type(6) {
+	top: 48%;
+	left: 50%;
+	animation-delay: 4.1s;
+}
 
 @keyframes cardSparkleDrift {
-	0% { opacity: 0; transform: translate(0, 6px) scale(0.6); }
-	15% { opacity: 0.95; }
-	50% { opacity: 0.7; transform: translate(6px, -10px) scale(1); }
-	85% { opacity: 0.3; }
-	100% { opacity: 0; transform: translate(-4px, -20px) scale(0.6); }
+	0% {
+		opacity: 0;
+		transform: translate(0, 6px) scale(0.6);
+	}
+
+	15% {
+		opacity: 0.95;
+	}
+
+	50% {
+		opacity: 0.7;
+		transform: translate(6px, -10px) scale(1);
+	}
+
+	85% {
+		opacity: 0.3;
+	}
+
+	100% {
+		opacity: 0;
+		transform: translate(-4px, -20px) scale(0.6);
+	}
 }
 
 .invitation-card .card-sparkle:nth-of-type(2n) {
@@ -3422,11 +3995,28 @@ input[type="text"],
 }
 
 @keyframes cardSparkleDriftAlt {
-	0% { opacity: 0; transform: translate(0, 6px) scale(0.6); }
-	15% { opacity: 0.95; }
-	50% { opacity: 0.7; transform: translate(-8px, -10px) scale(1); }
-	85% { opacity: 0.3; }
-	100% { opacity: 0; transform: translate(6px, -20px) scale(0.6); }
+	0% {
+		opacity: 0;
+		transform: translate(0, 6px) scale(0.6);
+	}
+
+	15% {
+		opacity: 0.95;
+	}
+
+	50% {
+		opacity: 0.7;
+		transform: translate(-8px, -10px) scale(1);
+	}
+
+	85% {
+		opacity: 0.3;
+	}
+
+	100% {
+		opacity: 0;
+		transform: translate(6px, -20px) scale(0.6);
+	}
 }
 
 /* Ornate Floating Petals (3D falling animation) */
@@ -3450,19 +4040,50 @@ input[type="text"],
 	animation: petalFallMarigold 7.5s linear infinite;
 }
 
-.invitation-card .petal:nth-of-type(1) { left: 15%; animation-delay: 0s; animation-duration: 6.8s; }
-.invitation-card .petal:nth-of-type(2) { left: 42%; animation-delay: 1.5s; animation-duration: 8.5s; }
-.invitation-card .petal:nth-of-type(3) { left: 78%; animation-delay: 3s; animation-duration: 7.2s; }
-.invitation-card .petal:nth-of-type(4) { left: 25%; animation-delay: 4.5s; animation-duration: 7.8s; }
-.invitation-card .petal:nth-of-type(5) { left: 65%; animation-delay: 5.8s; animation-duration: 9s; }
+.invitation-card .petal:nth-of-type(1) {
+	left: 15%;
+	animation-delay: 0s;
+	animation-duration: 6.8s;
+}
+
+.invitation-card .petal:nth-of-type(2) {
+	left: 42%;
+	animation-delay: 1.5s;
+	animation-duration: 8.5s;
+}
+
+.invitation-card .petal:nth-of-type(3) {
+	left: 78%;
+	animation-delay: 3s;
+	animation-duration: 7.2s;
+}
+
+.invitation-card .petal:nth-of-type(4) {
+	left: 25%;
+	animation-delay: 4.5s;
+	animation-duration: 7.8s;
+}
+
+.invitation-card .petal:nth-of-type(5) {
+	left: 65%;
+	animation-delay: 5.8s;
+	animation-duration: 9s;
+}
 
 @keyframes petalFallRose {
 	0% {
 		transform: translateY(-25px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateX(0);
 		opacity: 0;
 	}
-	10% { opacity: 0.85; }
-	90% { opacity: 0.85; }
+
+	10% {
+		opacity: 0.85;
+	}
+
+	90% {
+		opacity: 0.85;
+	}
+
 	100% {
 		transform: translateY(730px) rotateX(360deg) rotateY(180deg) rotateZ(270deg) translateX(35px);
 		opacity: 0;
@@ -3474,187 +4095,21 @@ input[type="text"],
 		transform: translateY(-25px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateX(0);
 		opacity: 0;
 	}
-	10% { opacity: 0.9; }
-	90% { opacity: 0.9; }
+
+	10% {
+		opacity: 0.9;
+	}
+
+	90% {
+		opacity: 0.9;
+	}
+
 	100% {
 		transform: translateY(730px) rotateX(180deg) rotateY(360deg) rotateZ(450deg) translateX(-35px);
 		opacity: 0;
 	}
 }
 
-/* ── Vector Ornate Card Decorations (Image 1 & 2 styles) ── */
-.reception-decorations,
-.wedding-decorations {
-	position: absolute;
-	inset: 0;
-	pointer-events: none;
-	overflow: hidden;
-	z-index: 1;
-}
-
-/* Make sure all text content sits above the decorations */
-.invitation-card .card-main-title,
-.invitation-card .card-title-divider,
-.invitation-card .card-connector,
-.invitation-card .card-date-tag,
-.invitation-card .card-time-tag,
-.invitation-card .card-venue-section,
-.invitation-card .card-actions,
-.invitation-card .card-map-wrapper {
-	position: relative;
-	z-index: 2;
-}
-
-/* Reception Card (Pink Arch) Frame — sized and positioned to sit inside
-   the card's own padding, framing the content like the pavilion-arch
-   reference, instead of overlapping the title / date / venue text. */
-.reception-arch {
-	position: absolute;
-	top: 4px;
-	left: 4px;
-	right: 4px;
-	height: 92px;
-	z-index: 1;
-	opacity: 0.9;
-}
-
-.reception-pillar {
-	position: absolute;
-	top: 4px;
-	bottom: 4px;
-	width: 22px;
-	z-index: 1;
-	opacity: 0.9;
-}
-
-.reception-pillar.left {
-	left: 4px;
-}
-
-.reception-pillar.right {
-	right: 4px;
-	transform: scaleX(-1);
-}
-
-/* Hanging strands sit inside the arch's own crown, well clear of the
-   chandelier icon and title that follow in normal flow beneath it. */
-.reception-garland-strings {
-	position: absolute;
-	top: 14px;
-	left: 56px;
-	right: 56px;
-	height: 46px;
-	display: flex;
-	justify-content: space-around;
-	z-index: 1;
-}
-
-.garland-string {
-	width: 8px;
-	height: 100%;
-	overflow: visible;
-	transform-origin: top center;
-	animation: stringSway 3.2s ease-in-out infinite alternate;
-}
-
-.garland-string.string-1 { animation-delay: 0s; }
-.garland-string.string-2 { animation-delay: 0.5s; animation-duration: 3.8s; }
-.garland-string.string-3 { animation-delay: 1.1s; animation-duration: 2.8s; }
-.garland-string.string-4 { animation-delay: 0.3s; animation-duration: 3s; }
-.garland-string.string-5 { animation-delay: 0.8s; animation-duration: 3.5s; }
-.garland-string.string-6 { animation-delay: 1.3s; animation-duration: 3.1s; }
-
-@keyframes stringSway {
-	0% { transform: rotate(-2.5deg); }
-	100% { transform: rotate(2.5deg); }
-}
-
-.reception-leaves {
-	position: absolute;
-	bottom: 4px;
-	width: 56px;
-	height: 52px;
-	z-index: 1;
-	opacity: 0.9;
-}
-
-.left-leaves {
-	left: 4px;
-}
-
-.right-leaves {
-	right: 4px;
-}
-
-/* Wedding Card (Temple Gopuram) Frame */
-.wedding-gopuram-watermark {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: min(300px, 85%);
-	height: min(520px, 85%);
-	z-index: 0;
-	opacity: 0.65;
-}
-
-/* Diyas hang from the very top edge only, inside the card's header band,
-   so they never reach the icon / title that starts in normal flow below. */
-.wedding-hanging-diyas {
-	position: absolute;
-	top: 4px;
-	left: 38px;
-	right: 38px;
-	height: 64px;
-	z-index: 1;
-}
-
-.hanging-diya {
-	position: absolute;
-	top: 0;
-	width: 18px;
-	height: 60px;
-	transform-origin: top center;
-	animation: diyaSway 4.2s ease-in-out infinite alternate;
-}
-
-.diya-left-1 { left: 0; }
-.diya-left-2 { left: 28px; height: 42px; animation-delay: 0.6s; animation-duration: 3.5s; }
-.diya-right-1 { right: 0; animation-delay: 0.3s; animation-duration: 4.5s; }
-.diya-right-2 { right: 28px; height: 42px; animation-delay: 0.9s; animation-duration: 3.8s; }
-
-@keyframes diyaSway {
-	0% { transform: rotate(-1.5deg); }
-	100% { transform: rotate(1.5deg); }
-}
-
-.diya-flame {
-	animation: flameFlicker 0.15s ease-in-out infinite alternate;
-	transform-origin: bottom center;
-}
-
-@keyframes flameFlicker {
-	0% { transform: scale(0.95) rotate(-1deg); opacity: 0.85; }
-	100% { transform: scale(1.05) rotate(1deg); opacity: 1; }
-}
-
-.corner-lotus {
-	position: absolute;
-	bottom: 4px;
-	width: 54px;
-	height: 44px;
-	z-index: 1;
-	opacity: 0.9;
-	filter: drop-shadow(0 2px 4px rgba(130, 80, 80, 0.12));
-}
-
-.left-lotus {
-	left: 4px;
-}
-
-.right-lotus {
-	right: 4px;
-}
 
 
 /* ── Disable hover transformations on touch devices ── */
@@ -3686,7 +4141,7 @@ input[type="text"],
 	.detail-item-logo:hover .company-logo-large {
 		transform: none !important;
 	}
-	
+
 	.card-top-icon,
 	.card-top-icon svg,
 	.temple-toran circle,
