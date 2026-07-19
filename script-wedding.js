@@ -703,7 +703,7 @@ const translations = {
     venueType: "Marriage Hall",
     venueAddress: "No: 6/89, Sathiamangalam,<br />Kullampatty (P.O), Valasaiyur,<br />Salem - 636103, Tamil Nadu",
     venueDirections: "🚗 Get Directions",
-    footerText: "Created with <span class=\"footer-heart\">♥</span> by Naveenkumar and team · 30.08.2026"
+    footerText: "Created with <span class=\"footer-heart\">♥</span> by <a href=\"https://www.linkedin.com/in/naveen-kumar-s-60b18232a\" target=\"_blank\" rel=\"noopener\" class=\"footer-author-glow\">Naveenkumar</a> and team · 30.08.2026"
   },
   ta: {
     heroPreTitle: "என்றென்றும் இணைந்து",
@@ -785,7 +785,7 @@ const translations = {
     venueType: "திருமண மண்டபம்",
     venueAddress: "எண்: 6/89, சத்தியமங்கலம்,<br />குள்ளம்பட்டி (P.O), வலசையூர்,<br />சேலம் - 636103, தமிழ்நாடு",
     venueDirections: "🚗 வழியைக் காட்டு",
-    footerText: "நவீன்குமார் மற்றும் குழுவினரால் அன்புடன் <span class=\"footer-heart\">♥</span>-உடன் உருவாக்கப்பட்டது · 30.08.2026"
+    footerText: "<a href=\"https://www.linkedin.com/in/naveen-kumar-s-60b18232a\" target=\"_blank\" rel=\"noopener\" class=\"footer-author-glow\">நவீன்குமார்</a> மற்றும் குழுவினரால் அன்புடன் <span class=\"footer-heart\">♥</span>-உடன் உருவாக்கப்பட்டது · 30.08.2026"
   }
 };
 

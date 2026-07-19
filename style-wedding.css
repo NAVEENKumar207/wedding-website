@@ -1484,6 +1484,40 @@ body.site-unlocked .entry-screen {
 	color: var(--gold-soft);
 }
 
+.footer-author-glow {
+	color: #d8b65a;
+	text-decoration: none;
+	font-weight: 600;
+	position: relative;
+	display: inline-block;
+	transition: color 0.3s ease, text-shadow 0.3s ease;
+	text-shadow: 0 0 4px rgba(216, 182, 90, 0.4);
+	animation: authorGlowPulse 2s ease-in-out infinite alternate;
+}
+
+.footer-author-glow:hover {
+	color: #fdf0c8;
+	text-shadow: 
+		0 0 8px #fdf0c8,
+		0 0 16px #d8b65a,
+		0 0 24px #c99a35;
+}
+
+@keyframes authorGlowPulse {
+	0% {
+		text-shadow: 
+			0 0 4px rgba(216, 182, 90, 0.4),
+			0 0 8px rgba(216, 182, 90, 0.2);
+	}
+	100% {
+		text-shadow: 
+			0 0 10px rgba(253, 240, 200, 0.95),
+			0 0 20px rgba(216, 182, 90, 0.75),
+			0 0 30px rgba(201, 154, 53, 0.45);
+		color: #fdf0c8;
+	}
+}
+
 /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 	 NEW STYLES: CARICATURES, SAVE THE DATE, FAMILY & DIRECTIONS
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
