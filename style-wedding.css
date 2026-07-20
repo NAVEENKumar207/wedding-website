@@ -2644,19 +2644,20 @@ button:focus-visible {
 .wedding-hanging-diyas {
 	position: absolute;
 	top: 4px;
-	left: 38px;
-	right: 38px;
-	height: 140px; /* Increased length to make glowing lights stand out */
+	left: 20px;
+	right: 20px;
+	height: 210px;
 	z-index: 1;
 }
 
 .hanging-diya {
 	position: absolute;
 	top: 0;
-	width: 18px;
-	height: 135px; /* Increased length of the light */
+	width: 32px;
+	height: 200px;
 	transform-origin: top center;
 	animation: diyaSway 4.2s ease-in-out infinite alternate;
+	filter: drop-shadow(0 3px 6px rgba(184, 144, 48, 0.35));
 }
 
 .diya-left-1 {
@@ -2664,8 +2665,8 @@ button:focus-visible {
 }
 
 .diya-left-2 {
-	left: 28px;
-	height: 95px; /* Increased length of the light */
+	left: 36px;
+	height: 140px;
 	animation-delay: 0.6s;
 	animation-duration: 3.5s;
 }
@@ -2677,8 +2678,8 @@ button:focus-visible {
 }
 
 .diya-right-2 {
-	right: 28px;
-	height: 95px; /* Increased length of the light */
+	right: 36px;
+	height: 140px;
 	animation-delay: 0.9s;
 	animation-duration: 3.8s;
 }
@@ -2707,83 +2708,6 @@ button:focus-visible {
 	100% {
 		transform: scale(1.05) rotate(1deg);
 		opacity: 1;
-	}
-}
-
-/* Golden Ambient Lights & Glow Halos for Wedding Box */
-.wedding-golden-lights-container {
-	position: absolute;
-	inset: 0;
-	pointer-events: none;
-	z-index: 1;
-	overflow: hidden;
-}
-
-.diya-glow-halo {
-	position: absolute;
-	width: 80px;
-	height: 80px;
-	border-radius: 50%;
-	background: radial-gradient(circle, rgba(255, 215, 0, 0.45) 0%, rgba(255, 167, 38, 0.22) 50%, transparent 75%);
-	filter: blur(8px);
-	animation: diyaHaloPulse 2.5s ease-in-out infinite alternate;
-}
-
-.halo-left-1 {
-	top: 190px;
-	left: 15px;
-}
-
-.halo-left-2 {
-	top: 110px;
-	left: 45px;
-	animation-delay: 0.6s;
-}
-
-.halo-right-1 {
-	top: 190px;
-	right: 15px;
-	animation-delay: 0.3s;
-}
-
-.halo-right-2 {
-	top: 110px;
-	right: 45px;
-	animation-delay: 0.9s;
-}
-
-.gopuram-light-halo {
-	position: absolute;
-	top: 40px;
-	left: 50%;
-	transform: translateX(-50%);
-	width: 140px;
-	height: 140px;
-	border-radius: 50%;
-	background: radial-gradient(circle, rgba(255, 235, 150, 0.42) 0%, rgba(216, 182, 90, 0.2) 55%, transparent 75%);
-	filter: blur(12px);
-	animation: gopuramHaloGlow 3.5s ease-in-out infinite alternate;
-}
-
-@keyframes diyaHaloPulse {
-	0% {
-		opacity: 0.6;
-		transform: scale(0.9);
-	}
-	100% {
-		opacity: 1;
-		transform: scale(1.18);
-	}
-}
-
-@keyframes gopuramHaloGlow {
-	0% {
-		opacity: 0.5;
-		transform: translateX(-50%) scale(0.95);
-	}
-	100% {
-		opacity: 0.95;
-		transform: translateX(-50%) scale(1.15);
 	}
 }
 
