@@ -1403,43 +1403,43 @@ body.site-unlocked .entry-screen {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	padding: 0.25rem 0.85rem;
+	padding: 0.28rem 0.9rem;
 	margin: 0 0.25rem;
 	border-radius: 50px;
-	background: rgba(216, 182, 90, 0.08);
-	border: 1px solid rgba(216, 182, 90, 0.35);
-	color: #d8b65a;
+	background: linear-gradient(135deg, #d8b65a, #c99a35);
+	border: 1px solid #fdf0c8;
+	color: #1a0f12 !important;
 	text-decoration: none;
-	font-weight: 600;
+	font-weight: 700;
 	font-size: 0.95rem;
 	transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-	box-shadow: 0 0 6px rgba(216, 182, 90, 0.15);
+	box-shadow: 
+		0 0 12px rgba(216, 182, 90, 0.6),
+		0 4px 15px rgba(216, 182, 90, 0.35);
 	vertical-align: middle;
 	animation: authorGlowPulse 2s ease-in-out infinite alternate;
 }
 
 .footer-author-glow:hover {
-	background: #d8b65a;
-	color: #1a0f12 !important;
-	border-color: #fdf0c8;
-	box-shadow: 
-		0 0 12px rgba(216, 182, 90, 0.6),
-		0 4px 15px rgba(216, 182, 90, 0.3);
-	transform: translateY(-1px);
+	background: rgba(216, 182, 90, 0.12);
+	color: #d8b65a !important;
+	border-color: #d8b65a;
+	box-shadow: 0 0 10px rgba(216, 182, 90, 0.3);
+	transform: translateY(-2px) scale(1.04);
 }
 
 @keyframes authorGlowPulse {
 	0% {
 		box-shadow: 
-			0 0 4px rgba(216, 182, 90, 0.2),
-			0 0 8px rgba(216, 182, 90, 0.1);
-		border-color: rgba(216, 182, 90, 0.35);
+			0 0 8px rgba(216, 182, 90, 0.4),
+			0 4px 12px rgba(216, 182, 90, 0.25);
+		border-color: rgba(253, 240, 200, 0.6);
 	}
 	100% {
 		box-shadow: 
-			0 0 12px rgba(253, 240, 200, 0.55),
-			0 0 20px rgba(216, 182, 90, 0.35);
-		border-color: rgba(253, 240, 200, 0.75);
+			0 0 18px rgba(253, 240, 200, 0.8),
+			0 0 25px rgba(216, 182, 90, 0.5);
+		border-color: #ffffff;
 	}
 }
 
@@ -2359,7 +2359,7 @@ button:focus-visible {
 	}
 }
 
-/* Floating heart shower — a soft, romantic full-screen touch */
+/* 3D Floating SVG Hearts for Destiny Blast celebration */
 .destiny-heart-layer {
 	position: fixed;
 	inset: 0;
@@ -2368,38 +2368,48 @@ button:focus-visible {
 	overflow: hidden;
 }
 
-.destiny-heart {
+.destiny-heart-wrapper {
 	position: absolute;
-	bottom: -12vh;
-	line-height: 1;
-	color: #e88fa3;
-	text-shadow:
-		0 0 14px rgba(232, 143, 163, 0.65),
-		0 0 5px rgba(255, 246, 220, 0.55);
-	opacity: 0;
+	bottom: -15vh;
 	will-change: transform, opacity;
 	animation-name: destinyHeartRise;
-	animation-timing-function: ease-out;
+	animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
 	animation-fill-mode: forwards;
+}
+
+.destiny-svg-heart {
+	width: 100%;
+	height: 100%;
+	display: block;
+	animation: heartSway 2.4s ease-in-out infinite alternate;
 }
 
 @keyframes destinyHeartRise {
 	0% {
-		transform: translate(0, 0) rotate(0deg) scale(0.55);
+		transform: translate(0, 0) rotate(0deg) scale(0.4);
 		opacity: 0;
 	}
 
-	12% {
+	15% {
 		opacity: 1;
 	}
 
-	78% {
-		opacity: 0.9;
+	80% {
+		opacity: 0.95;
 	}
 
 	100% {
-		transform: translate(var(--drift), -125vh) rotate(16deg) scale(1);
+		transform: translate(var(--drift), -130vh) rotate(var(--rotate)) scale(1.15);
 		opacity: 0;
+	}
+}
+
+@keyframes heartSway {
+	0% {
+		transform: rotate(-12deg) scale(0.92);
+	}
+	100% {
+		transform: rotate(12deg) scale(1.08);
 	}
 }
 
@@ -2697,6 +2707,83 @@ button:focus-visible {
 	100% {
 		transform: scale(1.05) rotate(1deg);
 		opacity: 1;
+	}
+}
+
+/* Golden Ambient Lights & Glow Halos for Wedding Box */
+.wedding-golden-lights-container {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	z-index: 1;
+	overflow: hidden;
+}
+
+.diya-glow-halo {
+	position: absolute;
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	background: radial-gradient(circle, rgba(255, 215, 0, 0.45) 0%, rgba(255, 167, 38, 0.22) 50%, transparent 75%);
+	filter: blur(8px);
+	animation: diyaHaloPulse 2.5s ease-in-out infinite alternate;
+}
+
+.halo-left-1 {
+	top: 190px;
+	left: 15px;
+}
+
+.halo-left-2 {
+	top: 110px;
+	left: 45px;
+	animation-delay: 0.6s;
+}
+
+.halo-right-1 {
+	top: 190px;
+	right: 15px;
+	animation-delay: 0.3s;
+}
+
+.halo-right-2 {
+	top: 110px;
+	right: 45px;
+	animation-delay: 0.9s;
+}
+
+.gopuram-light-halo {
+	position: absolute;
+	top: 40px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 140px;
+	height: 140px;
+	border-radius: 50%;
+	background: radial-gradient(circle, rgba(255, 235, 150, 0.42) 0%, rgba(216, 182, 90, 0.2) 55%, transparent 75%);
+	filter: blur(12px);
+	animation: gopuramHaloGlow 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes diyaHaloPulse {
+	0% {
+		opacity: 0.6;
+		transform: scale(0.9);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1.18);
+	}
+}
+
+@keyframes gopuramHaloGlow {
+	0% {
+		opacity: 0.5;
+		transform: translateX(-50%) scale(0.95);
+	}
+	100% {
+		opacity: 0.95;
+		transform: translateX(-50%) scale(1.15);
 	}
 }
 
@@ -4067,6 +4154,111 @@ input[type="text"],
 		transform: translateY(730px) rotateX(180deg) rotateY(360deg) rotateZ(450deg) translateX(-35px);
 		opacity: 0;
 	}
+}
+
+/* Ornate Floating Black Leaves for Reception Box */
+.reception-card-box .black-leaf {
+	position: absolute;
+	width: 18px;
+	height: 24px;
+	pointer-events: none;
+	z-index: 2;
+	opacity: 0;
+	transform-style: preserve-3d;
+	animation: blackLeafFall 8s linear infinite;
+	filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
+}
+
+.reception-card-box .black-leaf:nth-of-type(1) {
+	left: 10%;
+	animation-delay: 0s;
+	animation-duration: 7s;
+}
+
+.reception-card-box .black-leaf:nth-of-type(2) {
+	left: 28%;
+	animation-delay: 1.6s;
+	animation-duration: 8.5s;
+}
+
+.reception-card-box .black-leaf:nth-of-type(3) {
+	left: 48%;
+	animation-delay: 3.2s;
+	animation-duration: 7.2s;
+}
+
+.reception-card-box .black-leaf:nth-of-type(4) {
+	left: 68%;
+	animation-delay: 4.8s;
+	animation-duration: 8s;
+}
+
+.reception-card-box .black-leaf:nth-of-type(5) {
+	left: 84%;
+	animation-delay: 2.2s;
+	animation-duration: 9s;
+}
+
+.reception-card-box .black-leaf:nth-of-type(6) {
+	left: 40%;
+	animation-delay: 6s;
+	animation-duration: 7.8s;
+}
+
+@keyframes blackLeafFall {
+	0% {
+		transform: translateY(-30px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateX(0);
+		opacity: 0;
+	}
+
+	10% {
+		opacity: 0.95;
+	}
+
+	90% {
+		opacity: 0.95;
+	}
+
+	100% {
+		transform: translateY(740px) rotateX(360deg) rotateY(180deg) rotateZ(320deg) translateX(38px);
+		opacity: 0;
+	}
+}
+
+/* Lock floating music/translate widget at the closing section line */
+.venue-closing {
+	position: relative;
+}
+
+.music-player-widget.at-closing-section {
+	position: absolute !important;
+	bottom: auto !important;
+	top: -65px !important;
+	left: 1.5rem !important;
+}
+
+/* Translate Icon Button (Circular style like Music button with அ / A indicator) */
+.translate-icon-btn {
+	background: rgba(255, 255, 255, 0.92) !important;
+}
+
+.translate-lang-icon {
+	font-family: 'Cormorant Garamond', 'Montserrat', serif, sans-serif;
+	font-size: 1.3rem;
+	font-weight: 700;
+	color: #b89030;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	line-height: 1;
+	transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.translate-icon-btn:hover .translate-lang-icon {
+	color: #1a0f12;
+	transform: scale(1.12);
 }
 
 

@@ -629,7 +629,7 @@ const translations = {
     heroGroom: "Tharun R",
     heroBride: "Poongodi S",
     heroCta: "Begin the Journey",
-    translateBtn: "🌐 Translate (தமிழ்)",
+    translateBtn: "அ",
     saveTheDate: "Save the Date",
     scratchDate: "30 Aug 2026",
     scratchDay: "Reception: 29th Aug, 6 PM Onwards",
@@ -691,7 +691,7 @@ const translations = {
     heroGroom: "தருண் R",
     heroBride: "பூங்கொடி S",
     heroCta: "பயணத்தை தொடங்குங்கள்",
-    translateBtn: "🌐 Translate (English)",
+    translateBtn: "A",
     saveTheDate: "தேதியை குறித்துக்கொள்",
     scratchDate: "30 ஆகஸ்ட் 2026",
     scratchDay: "வரவேற்பு: 29 ஆகஸ்ட், மாலை 6 மணி முதல்",
@@ -926,98 +926,130 @@ function renderHeroNameLetters() {
     return destinyConfetti;
   }
 
-  // Spawns a shower of floating hearts drifting up the full screen — a
-  // soft, romantic full-screen "blast" that suits the wedding theme.
+  // Spawns a spectacular shower of 3D gradient vector hearts drifting up the full screen
   function spawnFloatingHearts(count) {
     const layer = document.createElement('div');
     layer.className = 'destiny-heart-layer';
     document.body.appendChild(layer);
 
-    const glyphs = ['♥', '💗', '💛'];
+    const colors = [
+      { start: '#ff4b72', end: '#d81b60', glow: 'rgba(255, 75, 114, 0.85)' },
+      { start: '#ffd700', end: '#d8b65a', glow: 'rgba(255, 215, 0, 0.85)' },
+      { start: '#ff8a9a', end: '#e91e63', glow: 'rgba(233, 30, 99, 0.75)' },
+      { start: '#ffffff', end: '#fdf0c8', glow: 'rgba(255, 255, 255, 0.9)' },
+    ];
+
     for (let i = 0; i < count; i++) {
-      const heart = document.createElement('span');
-      heart.className = 'destiny-heart';
-      heart.textContent = glyphs[Math.floor(Math.random() * glyphs.length)];
-      const size = 1.1 + Math.random() * 1.9;
-      const duration = 2.6 + Math.random() * 2.2;
-      const delay = Math.random() * 0.6;
-      const drift = (Math.random() * 2 - 1) * 90;
-      heart.style.left = (Math.random() * 100) + 'vw';
-      heart.style.fontSize = size + 'rem';
-      heart.style.setProperty('--drift', drift + 'px');
-      heart.style.animationDuration = duration + 's';
-      heart.style.animationDelay = delay + 's';
-      layer.appendChild(heart);
+      const wrapper = document.createElement('div');
+      wrapper.className = 'destiny-heart-wrapper';
+      const c = colors[Math.floor(Math.random() * colors.length)];
+      const gradientId = 'destinyGrad_' + Math.random().toString(36).substr(2, 6);
+
+      wrapper.innerHTML = `
+        <svg viewBox="0 0 32 32" class="destiny-svg-heart">
+          <defs>
+            <linearGradient id="${gradientId}" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="${c.start}" />
+              <stop offset="100%" stop-color="${c.end}" />
+            </linearGradient>
+          </defs>
+          <path d="M16 28.5 C16 28.5 3 18.5 3 10.5 C3 5.5 7 2 12 2 C14.5 2 16 3.5 16 3.5 C16 3.5 17.5 2 20 2 C25 2 29 5.5 29 10.5 C29 18.5 16 28.5 16 28.5 Z" fill="url(#${gradientId})" filter="drop-shadow(0 4px 12px ${c.glow})" />
+        </svg>
+      `;
+
+      const size = 1.8 + Math.random() * 2.8;
+      const duration = 2.8 + Math.random() * 2.6;
+      const delay = Math.random() * 0.7;
+      const drift = (Math.random() * 2 - 1) * 120;
+      const rotate = (Math.random() * 2 - 1) * 45;
+
+      wrapper.style.left = (Math.random() * 92 + 4) + 'vw';
+      wrapper.style.width = size + 'rem';
+      wrapper.style.height = size + 'rem';
+      wrapper.style.setProperty('--drift', drift + 'px');
+      wrapper.style.setProperty('--rotate', rotate + 'deg');
+      wrapper.style.animationDuration = duration + 's';
+      wrapper.style.animationDelay = delay + 's';
+      layer.appendChild(wrapper);
     }
 
-    window.setTimeout(() => layer.remove(), 5200);
+    window.setTimeout(() => layer.remove(), 6200);
   }
 
   // Fires the full-screen love-themed celebration: a warm flash, a shower
-  // of floating hearts, and heart-shaped confetti. `intensity` scales it.
+  // of 3D gradient vector hearts, card pulse glow, and heart-shaped confetti.
   function triggerDestinyBlast(intensity) {
     const isGrand = intensity === 'grand';
 
-    // Full-screen warm flash
+    // Full-screen warm flash & radiant love aura
     const flash = document.createElement('div');
     flash.className = 'destiny-blast-flash';
     document.body.appendChild(flash);
     requestAnimationFrame(() => flash.classList.add('is-active'));
-    window.setTimeout(() => flash.remove(), 1000);
+    window.setTimeout(() => flash.remove(), 1200);
 
-    // Floating heart shower
-    spawnFloatingHearts(isGrand ? 34 : 18);
+    // Couple FLAMES card bounce & pulse aura
+    const coupleCard = document.getElementById('flamesCoupleCard');
+    if (coupleCard && typeof gsap !== 'undefined') {
+      gsap.fromTo(coupleCard, 
+        { scale: 0.96, boxShadow: '0 0 0 rgba(242, 213, 116, 0)' },
+        { scale: 1, boxShadow: '0 0 50px rgba(242, 213, 116, 0.6)', duration: 0.8, ease: 'back.out(1.7)' }
+      );
+    }
+
+    // Floating 3D SVG heart shower
+    spawnFloatingHearts(isGrand ? 45 : 24);
 
     // Heart-shaped confetti burst in the site's rose-gold palette
     const fire = getDestinyConfetti();
     if (fire) {
-      const themeColors = ['#f6c453', '#fdf0c8', '#e88fa3', '#ffffff', '#c99a35', '#b25a72'];
+      const themeColors = ['#f6c453', '#fdf0c8', '#e88fa3', '#ffffff', '#c99a35', '#b25a72', '#ff4b72'];
       const shapes = destinyHeartShape ? [destinyHeartShape, 'circle'] : ['circle'];
 
       fire({
-        particleCount: isGrand ? 90 : 50,
-        spread: isGrand ? 110 : 85,
-        startVelocity: isGrand ? 48 : 36,
+        particleCount: isGrand ? 120 : 65,
+        spread: isGrand ? 120 : 90,
+        startVelocity: isGrand ? 52 : 38,
         origin: { y: 0.5 },
         colors: themeColors,
         shapes,
-        scalar: isGrand ? 1.3 : 1.1,
-        ticks: 280,
+        scalar: isGrand ? 1.4 : 1.15,
+        ticks: 300,
       });
 
       window.setTimeout(() => {
         fire({
-          particleCount: isGrand ? 40 : 20,
+          particleCount: isGrand ? 50 : 25,
           angle: 60,
-          spread: 70,
-          startVelocity: 42,
+          spread: 75,
+          startVelocity: 45,
           origin: { x: 0, y: 0.65 },
           colors: themeColors,
           shapes,
-          scalar: 1.1,
+          scalar: 1.15,
         });
         fire({
-          particleCount: isGrand ? 40 : 20,
+          particleCount: isGrand ? 50 : 25,
           angle: 120,
-          spread: 70,
-          startVelocity: 42,
+          spread: 75,
+          startVelocity: 45,
           origin: { x: 1, y: 0.65 },
           colors: themeColors,
           shapes,
-          scalar: 1.1,
+          scalar: 1.15,
         });
       }, 180);
 
       if (isGrand) {
         window.setTimeout(() => {
           fire({
-            particleCount: 60,
-            spread: 130,
-            startVelocity: 50,
+            particleCount: 75,
+            spread: 140,
+            startVelocity: 55,
             origin: { y: 0.35 },
             colors: themeColors,
             shapes,
-            scalar: 1.2,
+            scalar: 1.25,
           });
         }, 380);
       }
@@ -1156,14 +1188,14 @@ function renderHeroNameLetters() {
     }, cancelDelay + 0.2);
 
     // Eliminate FLAMES letters one at a time, mirroring the real algorithm
-    const finalLetter = isCoupleMatch ? 'M' : solveFlames(remaining);
+    const finalLetter = isCoupleMatch ? 'L' : solveFlames(remaining);
     let letters = ['F', 'L', 'A', 'M', 'E', 'S'];
     let idx = 0;
     let stepTime = cancelDelay + 0.9;
     const wordSpans = () => wordRowEl.querySelectorAll('.flames-word-letter');
 
     if (isCoupleMatch) {
-      const toRemove = ['F', 'L', 'A', 'E', 'S'];
+      const toRemove = ['F', 'A', 'M', 'E', 'S'];
       toRemove.forEach((letterToRemove, stepIdx) => {
         tl.add(() => {
           const spans = wordSpans();
@@ -1400,4 +1432,27 @@ function renderHeroNameLetters() {
 
   updateTimer();
   setInterval(updateTimer, 1000);
+})();
+
+// ══════════════════════════════════════════════════════════════════════════
+// STOP FLOATING WIDGET AT CLOSING SECTION ("With Love & Joy")
+// ══════════════════════════════════════════════════════════════════════════
+(function initWidgetScrollStop() {
+  const widget = document.getElementById('musicPlayerWidget');
+  const closing = document.getElementById('venueClosing');
+  if (!widget || !closing) return;
+
+  function updateWidgetPosition() {
+    const closingRect = closing.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    if (closingRect.top <= windowHeight - 90) {
+      widget.classList.add('at-closing-section');
+    } else {
+      widget.classList.remove('at-closing-section');
+    }
+  }
+
+  window.addEventListener('scroll', updateWidgetPosition, { passive: true });
+  window.addEventListener('resize', updateWidgetPosition, { passive: true });
+  updateWidgetPosition();
 })();
