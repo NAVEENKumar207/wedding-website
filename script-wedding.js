@@ -39,16 +39,194 @@
     }
     // Play background music
     playMusic();
-    // GSAP animation to smoothly fade and slide the entry overlay out of view
-    gsap.to(entryScreen, {
-      opacity: 0,
-      yPercent: -100,
-      duration: 1.2,
-      ease: 'power3.inOut',
-      onComplete: () => {
-        entryScreen.classList.add('is-hidden');
+    const doorLeft = document.getElementById('entryDoorLeft');
+    const doorRight = document.getElementById('entryDoorRight');
+    const centerWrapper = document.getElementById('entryCenterWrapper');
+    const lightSeam = document.getElementById('entryDoorLightSeam');
+    const ripple = document.getElementById('entryLogoRipple');
+    const goldFlash = document.getElementById('entryCenterGoldFlash');
+    const lightRays = document.getElementById('entryGoldLightRays');
+    const orbitRing = document.getElementById('entryLogoOrbit');
+    const heroSection = document.querySelector('.hero');
+    const heroNames = document.getElementById('heroNames');
+
+    // Fire dual golden confetti fountains (left & right angled blast)
+    if (typeof confetti === 'function') {
+      confetti({
+        particleCount: 45,
+        angle: 60,
+        spread: 70,
+        startVelocity: 32,
+        origin: { y: 0.5, x: 0.45 },
+        colors: ['#ffd700', '#d8b65a', '#ffffff', '#fdf0c8']
+      });
+      confetti({
+        particleCount: 45,
+        angle: 120,
+        spread: 70,
+        startVelocity: 32,
+        origin: { y: 0.5, x: 0.55 },
+        colors: ['#ffd700', '#d8b65a', '#ffffff', '#fdf0c8']
+      });
+    }
+
+    if (doorLeft && doorRight && typeof gsap !== 'undefined') {
+      const tl = gsap.timeline({
+        onComplete: () => {
+          entryScreen.classList.add('is-hidden');
+        }
+      });
+
+      // Scatter falling petals outward
+      tl.to('.entry-petal', {
+        scale: 1.4,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.04,
+        ease: 'power2.out'
+      }, 0);
+
+      // Orbit ring spin acceleration and burst
+      if (orbitRing) {
+        tl.to(orbitRing, {
+          scale: 2.8,
+          opacity: 0,
+          rotation: '+=360',
+          duration: 0.7,
+          ease: 'power2.out'
+        }, 0);
       }
-    });
+
+      // Center Gold Flash Burst flare
+      if (goldFlash) {
+        tl.fromTo(goldFlash, {
+          scale: 0.2,
+          opacity: 0
+        }, {
+          scale: 2.5,
+          opacity: 1,
+          duration: 0.55,
+          ease: 'power2.out'
+        }, 0).to(goldFlash, {
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power2.in'
+        }, 0.5);
+      }
+
+      // Rotating Gold Light Rays
+      if (lightRays) {
+        tl.fromTo(lightRays, {
+          scale: 0.3,
+          rotation: 0,
+          opacity: 0
+        }, {
+          scale: 2.4,
+          rotation: 120,
+          opacity: 0.9,
+          duration: 0.75,
+          ease: 'power2.out'
+        }, 0).to(lightRays, {
+          opacity: 0,
+          duration: 0.7
+        }, 0.5);
+      }
+
+      // Logo ripple shockwave
+      if (ripple) {
+        tl.to(ripple, {
+          scale: 2.5,
+          opacity: 0.95,
+          duration: 0.45,
+          ease: 'power2.out'
+        }, 0).to(ripple, {
+          opacity: 0,
+          duration: 0.4
+        }, 0.3);
+      }
+
+      // Light seam vertical flare
+      if (lightSeam) {
+        tl.to(lightSeam, {
+          opacity: 1,
+          width: '18px',
+          duration: 0.35,
+          ease: 'power2.out'
+        }, 0).to(lightSeam, {
+          opacity: 0,
+          duration: 0.8
+        }, 0.35);
+      }
+
+      // Central logo button pulse & scale out
+      tl.to(entryLogoButton, {
+        scale: 1.14,
+        duration: 0.25,
+        ease: 'back.out(1.8)'
+      }, 0).to(centerWrapper || entryLogoButton, {
+        scale: 0.82,
+        opacity: 0,
+        duration: 0.7,
+        ease: 'power2.in'
+      }, 0.25);
+
+      // Left and Right Doors glide open with 3D tilt & smooth slide
+      tl.to(doorLeft, {
+        xPercent: -100,
+        rotationY: -12,
+        duration: 1.5,
+        ease: 'power3.inOut'
+      }, 0.15);
+
+      tl.to(doorRight, {
+        xPercent: 100,
+        rotationY: 12,
+        duration: 1.5,
+        ease: 'power3.inOut'
+      }, 0.15);
+
+      // 3D depth reveal on hero section behind
+      if (heroSection) {
+        tl.fromTo(heroSection, {
+          scale: 0.92,
+          opacity: 0.8
+        }, {
+          scale: 1,
+          opacity: 1,
+          duration: 1.5,
+          ease: 'power2.out'
+        }, 0.2);
+      }
+
+      // Hero names sparkling gold pulse
+      if (heroNames) {
+        tl.fromTo(heroNames, {
+          scale: 0.95
+        }, {
+          scale: 1.05,
+          duration: 0.8,
+          yoyo: true,
+          repeat: 1,
+          ease: 'power2.out'
+        }, 0.6);
+      }
+
+      // Fade entry container
+      tl.to(entryScreen, {
+        opacity: 0,
+        duration: 0.5,
+        ease: 'power1.out'
+      }, 1.15);
+    } else {
+      gsap.to(entryScreen, {
+        opacity: 0,
+        duration: 1.2,
+        ease: 'power3.inOut',
+        onComplete: () => {
+          entryScreen.classList.add('is-hidden');
+        }
+      });
+    }
   }
   entryLogoButton.addEventListener('click', unlockSite);
   entryLogoButton.addEventListener('keydown', (e) => {
@@ -958,8 +1136,8 @@ function renderHeroNameLetters() {
       `;
 
       const size = 1.8 + Math.random() * 2.8;
-      const duration = 2.8 + Math.random() * 2.6;
-      const delay = Math.random() * 0.7;
+      const duration = 5.5 + Math.random() * 3.5;
+      const delay = Math.random() * 0.8;
       const drift = (Math.random() * 2 - 1) * 120;
       const rotate = (Math.random() * 2 - 1) * 45;
 
@@ -973,7 +1151,7 @@ function renderHeroNameLetters() {
       layer.appendChild(wrapper);
     }
 
-    window.setTimeout(() => layer.remove(), 6200);
+    window.setTimeout(() => layer.remove(), 9500);
   }
 
   // Fires the full-screen love-themed celebration: a warm flash, a shower
