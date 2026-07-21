@@ -37,8 +37,8 @@
     } else {
       window.scrollTo(0, 0);
     }
-    // Play background music
     playMusic();
+
     const doorLeft = document.getElementById('entryDoorLeft');
     const doorRight = document.getElementById('entryDoorRight');
     const centerWrapper = document.getElementById('entryCenterWrapper');
@@ -48,197 +48,88 @@
     const lightRays = document.getElementById('entryGoldLightRays');
     const orbitRing = document.getElementById('entryLogoOrbit');
     const heroSection = document.querySelector('.hero');
-    const heroNames = document.getElementById('heroNames');
 
-    // Fire dual golden confetti fountains (left & right angled blast)
+    const isTouchDevice = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+
+    // Confetti burst — reduced on mobile for performance
     if (typeof confetti === 'function') {
-      confetti({
-        particleCount: 45,
-        angle: 60,
-        spread: 70,
-        startVelocity: 32,
-        origin: { y: 0.5, x: 0.45 },
-        colors: ['#ffd700', '#d8b65a', '#ffffff', '#fdf0c8']
-      });
-      confetti({
-        particleCount: 45,
-        angle: 120,
-        spread: 70,
-        startVelocity: 32,
-        origin: { y: 0.5, x: 0.55 },
-        colors: ['#ffd700', '#d8b65a', '#ffffff', '#fdf0c8']
-      });
+      const pc = isTouchDevice ? 28 : 45;
+      confetti({ particleCount: pc, angle: 60, spread: 70, startVelocity: 30, origin: { y: 0.5, x: 0.45 }, colors: ['#ffd700', '#d8b65a', '#ffffff', '#fdf0c8'] });
+      confetti({ particleCount: pc, angle: 120, spread: 70, startVelocity: 30, origin: { y: 0.5, x: 0.55 }, colors: ['#ffd700', '#d8b65a', '#ffffff', '#fdf0c8'] });
     }
 
     if (doorLeft && doorRight && typeof gsap !== 'undefined') {
-      const tl = gsap.timeline({
-        onComplete: () => {
-          entryScreen.classList.add('is-hidden');
-        }
-      });
+      const tl = gsap.timeline({ onComplete: () => { entryScreen.classList.add('is-hidden'); } });
 
-      // Scatter falling petals outward
-      tl.to('.entry-petal', {
-        scale: 1.4,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.04,
-        ease: 'power2.out'
-      }, 0);
+      // Petals scatter and fade
+      tl.to('.entry-petal', { scale: 1.4, opacity: 0, duration: 0.55, stagger: 0.04, ease: 'power2.out' }, 0);
 
-      // Orbit ring spin acceleration and burst
+      // Orbit ring burst
       if (orbitRing) {
-        tl.to(orbitRing, {
-          scale: 2.8,
-          opacity: 0,
-          rotation: '+=360',
-          duration: 0.7,
-          ease: 'power2.out'
-        }, 0);
+        tl.to(orbitRing, { scale: 2.5, opacity: 0, rotation: '+=360', duration: 0.65, ease: 'power2.out' }, 0);
       }
 
-      // Center Gold Flash Burst flare
+      // Gold flash burst
       if (goldFlash) {
-        tl.fromTo(goldFlash, {
-          scale: 0.2,
-          opacity: 0
-        }, {
-          scale: 2.5,
-          opacity: 1,
-          duration: 0.55,
-          ease: 'power2.out'
-        }, 0).to(goldFlash, {
-          opacity: 0,
-          duration: 0.8,
-          ease: 'power2.in'
-        }, 0.5);
+        tl.fromTo(goldFlash, { scale: 0.2, opacity: 0 }, { scale: 2.2, opacity: 1, duration: 0.5, ease: 'power2.out' }, 0)
+          .to(goldFlash, { opacity: 0, duration: 0.75, ease: 'power2.in' }, 0.45);
       }
 
-      // Rotating Gold Light Rays
-      if (lightRays) {
-        tl.fromTo(lightRays, {
-          scale: 0.3,
-          rotation: 0,
-          opacity: 0
-        }, {
-          scale: 2.4,
-          rotation: 120,
-          opacity: 0.9,
-          duration: 0.75,
-          ease: 'power2.out'
-        }, 0).to(lightRays, {
-          opacity: 0,
-          duration: 0.7
-        }, 0.5);
+      // Gold light rays — desktop only (performance)
+      if (lightRays && !isTouchDevice) {
+        tl.fromTo(lightRays, { scale: 0.3, rotation: 0, opacity: 0 }, { scale: 2.4, rotation: 120, opacity: 0.9, duration: 0.75, ease: 'power2.out' }, 0)
+          .to(lightRays, { opacity: 0, duration: 0.65 }, 0.5);
       }
 
       // Logo ripple shockwave
       if (ripple) {
-        tl.to(ripple, {
-          scale: 2.5,
-          opacity: 0.95,
-          duration: 0.45,
-          ease: 'power2.out'
-        }, 0).to(ripple, {
-          opacity: 0,
-          duration: 0.4
-        }, 0.3);
+        tl.to(ripple, { scale: 2.5, opacity: 0.9, duration: 0.4, ease: 'power2.out' }, 0)
+          .to(ripple, { opacity: 0, duration: 0.38 }, 0.28);
       }
 
-      // Light seam vertical flare
+      // Light seam
       if (lightSeam) {
-        tl.to(lightSeam, {
-          opacity: 1,
-          width: '18px',
-          duration: 0.35,
-          ease: 'power2.out'
-        }, 0).to(lightSeam, {
-          opacity: 0,
-          duration: 0.8
-        }, 0.35);
+        tl.to(lightSeam, { opacity: 1, width: '16px', duration: 0.3, ease: 'power2.out' }, 0)
+          .to(lightSeam, { opacity: 0, duration: 0.75 }, 0.3);
       }
 
-      // Central logo button pulse & scale out
-      tl.to(entryLogoButton, {
-        scale: 1.14,
-        duration: 0.25,
-        ease: 'back.out(1.8)'
-      }, 0).to(centerWrapper || entryLogoButton, {
-        scale: 0.82,
-        opacity: 0,
-        duration: 0.7,
-        ease: 'power2.in'
-      }, 0.25);
+      // Logo button pulse → fade
+      tl.to(entryLogoButton, { scale: 1.12, duration: 0.22, ease: 'back.out(2)' }, 0)
+        .to(centerWrapper || entryLogoButton, { scale: 0.8, opacity: 0, duration: 0.65, ease: 'power2.in' }, 0.22);
 
-      // Left and Right Doors glide open with 3D tilt & smooth slide
-      tl.to(doorLeft, {
-        xPercent: -100,
-        rotationY: -12,
-        duration: 1.5,
-        ease: 'power3.inOut'
-      }, 0.15);
+      // Doors open — smooth 3D on desktop, clean slide on mobile
+      if (isTouchDevice) {
+        tl.to(doorLeft, { xPercent: -100, opacity: 0, duration: 1.2, ease: 'power4.inOut' }, 0.12);
+        tl.to(doorRight, { xPercent: 100, opacity: 0, duration: 1.2, ease: 'power4.inOut' }, 0.12);
+      } else {
+        tl.to(doorLeft, { xPercent: -100, rotationY: -12, duration: 1.4, ease: 'power3.inOut' }, 0.12);
+        tl.to(doorRight, { xPercent: 100, rotationY: 12, duration: 1.4, ease: 'power3.inOut' }, 0.12);
+      }
 
-      tl.to(doorRight, {
-        xPercent: 100,
-        rotationY: 12,
-        duration: 1.5,
-        ease: 'power3.inOut'
-      }, 0.15);
-
-      // 3D depth reveal on hero section behind
+      // Hero reveal
       if (heroSection) {
-        tl.fromTo(heroSection, {
-          scale: 0.92,
-          opacity: 0.8
-        }, {
-          scale: 1,
-          opacity: 1,
-          duration: 1.5,
-          ease: 'power2.out'
-        }, 0.2);
+        tl.fromTo(heroSection, { opacity: 0.75 }, { opacity: 1, duration: 1.2, ease: 'power2.out' }, 0.25);
       }
 
-      // Hero names sparkling gold pulse
-      if (heroNames) {
-        tl.fromTo(heroNames, {
-          scale: 0.95
-        }, {
-          scale: 1.05,
-          duration: 0.8,
-          yoyo: true,
-          repeat: 1,
-          ease: 'power2.out'
-        }, 0.6);
-      }
+      // Fade out entry screen
+      tl.to(entryScreen, { opacity: 0, duration: 0.45, ease: 'power1.out' }, 1.05);
 
-      // Fade entry container
-      tl.to(entryScreen, {
-        opacity: 0,
-        duration: 0.5,
-        ease: 'power1.out'
-      }, 1.15);
     } else {
       gsap.to(entryScreen, {
-        opacity: 0,
-        duration: 1.2,
-        ease: 'power3.inOut',
-        onComplete: () => {
-          entryScreen.classList.add('is-hidden');
-        }
+        opacity: 0, duration: 1.0, ease: 'power3.inOut',
+        onComplete: () => { entryScreen.classList.add('is-hidden'); }
       });
     }
   }
   entryLogoButton.addEventListener('click', unlockSite);
   entryLogoButton.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      unlockSite();
-    }
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); unlockSite(); }
   });
   if (playPauseBtn) {
     playPauseBtn.addEventListener('click', toggleMusic);
   }
 })();
+
 // â”€â”€ Register GSAP Plugins â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Scratch card reveal
 (function initScratchCard() {
@@ -738,7 +629,7 @@ window.addEventListener('resize', () => {
   });
 })();
 
-console.log('💖 Tharun R & Poongodi S — Wedding website loaded. See you on 30.08.2026! 🎉');
+console.log('💖 Tharun & Poongodi — Wedding website loaded. See you on 30.08.2026! 🎉');
 
 // ── 3D Tilt — cards & frames respond to pointer position ────────────
 (function init3DTilt() {
@@ -804,8 +695,8 @@ const translations = {
   en: {
     heroPreTitle: "Together Forever",
     heroQuote: '"In all the world, there is no heart for me like yours.<br />In all the world, there is no love for you like mine."',
-    heroGroom: "Tharun R",
-    heroBride: "Poongodi S",
+    heroGroom: "Tharun",
+    heroBride: "Poongodi",
     heroCta: "Begin the Journey",
     translateBtn: "அ",
     saveTheDate: "Save the Date",
@@ -813,7 +704,7 @@ const translations = {
     scratchDay: "Reception: 29th Aug, 6 PM Onwards",
     scratchTime: "Wedding: 30th Aug, 8 AM Onwards",
     closingScript: "With love & joy,",
-    closingNames: "Tharun R & Poongodi S",
+    closingNames: "Tharun & Poongodi",
     closingNote: "We look forward to celebrating this beautiful milestone with you.<br />Your presence is our greatest gift. 🙏",
     schedulePre: "Celebrate With Us",
     scheduleTitle: "Wedding Details & Venues",
@@ -866,8 +757,8 @@ const translations = {
   ta: {
     heroPreTitle: "என்றென்றும் இணைந்து",
     heroQuote: '"விண்ணிலும் மண்ணிலும் உன்னை விட எனக்கேற்ற இதயம் வேறில்லை.<br />உன்னை விட என் அன்பை ஆளும் உயிர் வேறில்லை."',
-    heroGroom: "தருண் R",
-    heroBride: "பூங்கொடி S",
+    heroGroom: "தருண்",
+    heroBride: "பூங்கொடி",
     heroCta: "பயணத்தை தொடங்குங்கள்",
     translateBtn: "A",
     saveTheDate: "தேதியை குறித்துக்கொள்",
@@ -875,7 +766,7 @@ const translations = {
     scratchDay: "வரவேற்பு: 29 ஆகஸ்ட், மாலை 6 மணி முதல்",
     scratchTime: "திருமணம்: 30 ஆகஸ்ட், காலை 8 மணி முதல்",
     closingScript: "அன்புடனும் மகிழ்ச்சியுடனும்,",
-    closingNames: "தருண் R & பூங்கொடி S",
+    closingNames: "தருண் & பூங்கொடி",
     closingNote: "இந்த அழகான தருணத்தைக் கொண்டாட உங்களை மகிழ்ச்சியோடு எதிர்நோக்குகிறோம்.<br />உங்கள் வருகையே எங்களுக்கு மிகப்பெரிய ஆசீர்வாதம். 🙏",
     schedulePre: "எங்களுடன் கொண்டாடுங்கள்",
     scheduleTitle: "திருமண விவரங்கள் & இடங்கள்",
@@ -997,9 +888,10 @@ function renderHeroNameLetters() {
     // Animate transition using GSAP for a elegant effect
     gsap.to('[data-translate]', {
       opacity: 0,
-      y: -5,
-      duration: 0.15,
-      stagger: 0.02,
+      y: -4,
+      duration: 0.18,
+      stagger: 0.015,
+      ease: 'power2.in',
       onComplete: () => {
         // Swap text
         document.querySelectorAll('[data-translate]').forEach(el => {
@@ -1019,8 +911,9 @@ function renderHeroNameLetters() {
         gsap.to('[data-translate]', {
           opacity: 1,
           y: 0,
-          duration: 0.25,
-          stagger: 0.02
+          duration: 0.35,
+          stagger: 0.015,
+          ease: 'power3.out'
         });
       }
     });
@@ -1434,8 +1327,8 @@ function renderHeroNameLetters() {
     const card = document.getElementById('flamesCoupleCard');
     if (!card) return;
 
-    const groomName = document.querySelector('#flamesCoupleCard .flames-name-block:first-child .flames-name-value')?.textContent || 'Tharun R';
-    const brideName = document.querySelector('#flamesCoupleCard .flames-name-block:last-child .flames-name-value')?.textContent || 'Poongodi S';
+    const groomName = document.querySelector('#flamesCoupleCard .flames-name-block:first-child .flames-name-value')?.textContent || 'Tharun';
+    const brideName = document.querySelector('#flamesCoupleCard .flames-name-block:last-child .flames-name-value')?.textContent || 'Poongodi';
 
     const rowAEl = document.getElementById('flamesCoupleRowA');
     const rowBEl = document.getElementById('flamesCoupleRowB');

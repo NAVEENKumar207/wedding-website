@@ -26,7 +26,7 @@
   <!-- canvas-confetti — powers the full-screen "Reveal Destiny" blast -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
-  <link rel="stylesheet" href="style-wedding.css?v=1.7" />
+  <link rel="stylesheet" href="style-wedding.css?v=2.4" />
 </head>
 
 <body class="site-locked">
@@ -75,6 +75,7 @@
         <span class="entry-logo-ring"></span>
         <img src="images/logo.png" alt="Tharun and Poongodi logo" class="entry-logo-image" />
       </button>
+      <p class="entry-tap-hint" aria-hidden="true">Tap to Enter ✨</p>
     </div>
   </div>
 
@@ -112,9 +113,9 @@
       </div>
 
       <h1 class="hero-names" id="heroNames">
-        <span class="hero-name-groom" data-translate="heroGroom">Tharun R</span>
+        <span class="hero-name-groom" data-translate="heroGroom">Tharun</span>
         <span class="hero-ampersand">&amp;</span>
-        <span class="hero-name-bride" data-translate="heroBride">Poongodi S</span>
+        <span class="hero-name-bride" data-translate="heroBride">Poongodi</span>
       </h1>
 
       <p class="hero-date" id="heroDate">30.08.2026</p>
@@ -443,21 +444,24 @@
           <span class="card-sparkle" aria-hidden="true"></span>
           <span class="card-sparkle" aria-hidden="true"></span>
 
-          <!-- Floating Marigold Petals -->
-          <svg class="petal" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12,2 C18,8 18,14 12,20 C6,14 6,8 12,2 Z" />
+          <!-- Floating Golden Leaves -->
+          <svg class="gold-leaf" viewBox="0 0 24 32" aria-hidden="true">
+            <path d="M12,2 C18,7 22,14 20,22 C18,28 12,30 12,30 C12,30 6,28 4,22 C2,14 6,7 12,2 Z M12,6 L12,26 M12,12 L16,9 M12,16 L8,13 M12,20 L16,17 M12,24 L8,21" fill="#dcb35c" stroke="#b89030" stroke-width="0.8" opacity="0.9" />
           </svg>
-          <svg class="petal" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12,2 C18,8 18,14 12,20 C6,14 6,8 12,2 Z" />
+          <svg class="gold-leaf" viewBox="0 0 24 32" aria-hidden="true">
+            <path d="M12,2 C18,7 22,14 20,22 C18,28 12,30 12,30 C12,30 6,28 4,22 C2,14 6,7 12,2 Z M12,6 L12,26 M12,12 L16,9 M12,16 L8,13 M12,20 L16,17 M12,24 L8,21" fill="#dcb35c" stroke="#b89030" stroke-width="0.8" opacity="0.9" />
           </svg>
-          <svg class="petal" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12,2 C18,8 18,14 12,20 C6,14 6,8 12,2 Z" />
+          <svg class="gold-leaf" viewBox="0 0 24 32" aria-hidden="true">
+            <path d="M12,2 C18,7 22,14 20,22 C18,28 12,30 12,30 C12,30 6,28 4,22 C2,14 6,7 12,2 Z M12,6 L12,26 M12,12 L16,9 M12,16 L8,13 M12,20 L16,17 M12,24 L8,21" fill="#dcb35c" stroke="#b89030" stroke-width="0.8" opacity="0.9" />
           </svg>
-          <svg class="petal" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12,2 C18,8 18,14 12,20 C6,14 6,8 12,2 Z" />
+          <svg class="gold-leaf" viewBox="0 0 24 32" aria-hidden="true">
+            <path d="M12,2 C18,7 22,14 20,22 C18,28 12,30 12,30 C12,30 6,28 4,22 C2,14 6,7 12,2 Z M12,6 L12,26 M12,12 L16,9 M12,16 L8,13 M12,20 L16,17 M12,24 L8,21" fill="#dcb35c" stroke="#b89030" stroke-width="0.8" opacity="0.9" />
           </svg>
-          <svg class="petal" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12,2 C18,8 18,14 12,20 C6,14 6,8 12,2 Z" />
+          <svg class="gold-leaf" viewBox="0 0 24 32" aria-hidden="true">
+            <path d="M12,2 C18,7 22,14 20,22 C18,28 12,30 12,30 C12,30 6,28 4,22 C2,14 6,7 12,2 Z M12,6 L12,26 M12,12 L16,9 M12,16 L8,13 M12,20 L16,17 M12,24 L8,21" fill="#dcb35c" stroke="#b89030" stroke-width="0.8" opacity="0.9" />
+          </svg>
+          <svg class="gold-leaf" viewBox="0 0 24 32" aria-hidden="true">
+            <path d="M12,2 C18,7 22,14 20,22 C18,28 12,30 12,30 C12,30 6,28 4,22 C2,14 6,7 12,2 Z M12,6 L12,26 M12,12 L16,9 M12,16 L8,13 M12,20 L16,17 M12,24 L8,21" fill="#dcb35c" stroke="#b89030" stroke-width="0.8" opacity="0.9" />
           </svg>
 
           <!-- Vector Ornate Frame (Image 1 style) -->
@@ -706,12 +710,12 @@
         <div class="flames-names-row">
           <div class="flames-name-block">
             <span class="flames-name-label" data-translate="flamesGroomLabel">Groom</span>
-            <span class="flames-name-value">Tharun R</span>
+            <span class="flames-name-value">Tharun</span>
           </div>
           <span class="flames-heart" aria-hidden="true">♥</span>
           <div class="flames-name-block">
             <span class="flames-name-label" data-translate="flamesBrideLabel">Bride</span>
-            <span class="flames-name-value">Poongodi S</span>
+            <span class="flames-name-value">Poongodi</span>
           </div>
         </div>
 
@@ -788,7 +792,7 @@
   <!-- Closing message -->
   <div class="venue-closing" id="venueClosing">
     <p class="closing-script" data-translate="closingScript">With love &amp; joy,</p>
-    <p class="closing-names" data-translate="closingNames">Tharun R &amp; Poongodi S</p>
+    <p class="closing-names" data-translate="closingNames">Tharun &amp; Poongodi</p>
     <p class="closing-note" data-translate="closingNote">We look forward to celebrating this beautiful milestone
       with you.<br />Your presence is
       our greatest gift. 🙏</p>
@@ -838,7 +842,7 @@
     </p>
   </footer>
 
-  <script src="script-wedding.js?v=1.7"></script>
+  <script src="script-wedding.js?v=1.9"></script>
 </body>
 
 </html>
