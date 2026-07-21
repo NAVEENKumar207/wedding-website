@@ -272,23 +272,6 @@ a {
 	}
 }
 
-.entry-logo-orbit {
-	position: absolute;
-	inset: -22px;
-	border-radius: 50%;
-	border: 1.5px dashed rgba(242, 213, 116, 0.65);
-	box-shadow: 0 0 25px rgba(242, 213, 116, 0.35);
-	pointer-events: none;
-	animation: orbitSpin 14s linear infinite;
-	z-index: 1;
-}
-
-@keyframes orbitSpin {
-	from { transform: rotate(0deg); }
-	to { transform: rotate(360deg); }
-}
-
-
 
 .entry-screen-bg {
 	position: absolute;
@@ -397,28 +380,6 @@ a {
 	box-shadow: 0 28px 65px rgba(130, 110, 80, 0.18),
 		inset 0 0 0 1.5px rgba(242, 213, 116, 0.55),
 		0 0 30px rgba(242, 213, 116, 0.15);
-}
-
-.entry-logo-ring {
-	position: absolute;
-	inset: 0.4rem;
-	border-radius: 50%;
-	border: 1.5px solid rgba(150, 114, 26, 0.75);
-	box-shadow: 0 0 0 8px rgba(242, 213, 116, 0.04), 0 0 54px rgba(242, 213, 116, 0.2);
-	animation: entryPulse 2.8s ease-in-out infinite;
-}
-
-.entry-logo-button::after {
-	content: '';
-	position: absolute;
-	inset: 0.15rem;
-	border-radius: 50%;
-	border: 1px solid rgba(150, 114, 26, 0.3);
-	pointer-events: none;
-}
-
-.entry-logo-button:hover .entry-logo-ring {
-	box-shadow: 0 0 0 10px rgba(242, 213, 116, 0.06), 0 0 56px rgba(242, 213, 116, 0.28);
 }
 
 .entry-logo-image {

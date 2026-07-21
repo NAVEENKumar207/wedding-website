@@ -46,7 +46,6 @@
     const ripple = document.getElementById('entryLogoRipple');
     const goldFlash = document.getElementById('entryCenterGoldFlash');
     const lightRays = document.getElementById('entryGoldLightRays');
-    const orbitRing = document.getElementById('entryLogoOrbit');
     const heroSection = document.querySelector('.hero');
 
     const isTouchDevice = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
@@ -64,10 +63,7 @@
       // Petals scatter and fade
       tl.to('.entry-petal', { scale: 1.4, opacity: 0, duration: 0.55, stagger: 0.04, ease: 'power2.out' }, 0);
 
-      // Orbit ring burst
-      if (orbitRing) {
-        tl.to(orbitRing, { scale: 2.5, opacity: 0, rotation: '+=360', duration: 0.65, ease: 'power2.out' }, 0);
-      }
+
 
       // Gold flash burst
       if (goldFlash) {
@@ -248,7 +244,7 @@
     fireworks.start();
     fireworksStopTimer = window.setTimeout(() => {
       fireworks.stop();
-    }, 15000);
+    }, 6000);
   }
 
   function revealCard() {
